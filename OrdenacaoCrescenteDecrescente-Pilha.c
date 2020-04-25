@@ -1,7 +1,6 @@
 
 #include <stdio.h>
 #include "pilha.h" 
-#include <string.h>
 
 
 void ordena(int numero[], int qtd, int opc, int opcc) {    
