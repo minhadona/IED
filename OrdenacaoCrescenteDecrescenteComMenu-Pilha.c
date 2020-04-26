@@ -35,7 +35,6 @@ int contaumavariavel (int numero){
         n=n/10; 
         c+=1;
                      }
-    printf("deslocamento do numero %d: %d\n",numero,c);
     return c; 
 }
 
@@ -119,7 +118,7 @@ int main (void) {
     int opcc;
     scanf("%d",&opcc);
 
-    printf("A ordem fica: %s",ordena(numero,qtd,opc,opcc)); 
+    printf("\n\nA ordem fica: %s",ordena(numero,qtd,opc,opcc)); 
     return 0;
 }
 
