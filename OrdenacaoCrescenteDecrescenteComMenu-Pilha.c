@@ -113,15 +113,13 @@ int main (void) {
     puts("\nqual ordem vc quer? 1) crescente 2) decrescente"); 
     int opc;
     scanf("%d",&opc);
+    while(opc!=1 && opc!=2) {puts("\nDIGITE UMA OPÇÃO VÁLIDA: 1) crescente 2) decrescente"); scanf("%d",&opc);}
     
     puts("\nquer tirar os numeros repetidos? 1) sim, tirar repeticoes 2) nao, manter numeros repetidos");
     int opcc;
     scanf("%d",&opcc);
+    while(opcc!=1 && opcc!=2) {puts("\nDIGITE UMA OPÇÃO VÁLIDA: 1) crescente 2) decrescente"); scanf("%d",&opcc);}
 
     printf("\n\nA ordem fica: %s",ordena(numero,qtd,opc,opcc)); 
     return 0;
 }
-
-
-
-
