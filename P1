@@ -1,0 +1,212 @@
+1. [0,5] Analise as afirmações a seguir e indique a alternativa correta. 
+I. Acesso é mais eficiente na alocação sequencial, enquanto inserção e remoção são mais eficientes na alocação encadeada. 
+II. Inserção e remoção são menos eficientes na alocação sequencial porque os itens ocupam posições arbitrárias de memória. 
+III. Acesso é menos eficiente na alocação encadeada porque apenas o primeiro item da lista pode ser acessado diretamente. 
+
+(a) Apenas as afirmações I e II são verdadeiras.
+(X) Apenas as afirmações I e III são verdadeiras. 
+(c) Apenas as afirmações II e III são verdadeiras.
+(d) Nenhuma das anteriores. 
+
+2. [0,5] A denominação mais apropriada para a estrutura de dados esquematizada a seguir é: 
+ (A->D, D->B, B->C, C->F, E->F)
+(a) Conjunto. 
+(b) Lista. 
+(c) Árvore. 
+(X) Grafo. 
+
+3. [0,5] Supondo que P é uma pilha, contendo pelo menos dois itens, analise as afirmações e indique a alternativa correta.
+I. O valor da expressão lógica (vaziap(P) || cheiap(P)) sempre é verdadeiro. 
+II. O tamanho da pilha P é mantido, após a execução do comando empilha(desempilha(P),P). 
+III. O estado da pilha P é mantido, após a execução do comando empilha(desempilha(P),P). 
+
+(a) Apenas as afirmações I e II são verdadeiras. 
+(b) Apenas as afirmações I e III são verdadeiras. 
+(X) Apenas as afirmações II e III são verdadeiras. 
+(d) Nenhuma das anteriores
+
+4. [0,5] Supondo que F é uma fila, contendo pelo menos dois itens, analise as afirmações e indique a alternativa correta. 
+I. O valor da expressão lógica (vaziaf(F) || cheiaf(F)) nem sempre é verdadeiro. 
+II. O tamanho da fila F é mantido, após a execução do comando enfileira(desenfileira(F),F). 
+III. O estado da fila F é mantido, após a execução do comando enfileira(desenfileira(F),F). 
+
+(X) Apenas as afirmações I e II são verdadeiras. 
+(b) Apenas as afirmações I e III são verdadeiras. 
+(c) Apenas as afirmações II e III são verdadeiras.
+(d) Nenhuma das anteriores. 
+
+5. [0,5] Supondo que pilha.h contém a implementação de Pilha, podemos afirmar que a execução do programa a seguir: 
+#include <stdio.h> #include "pilha.h" // pilha de reais 
+int main(void) {  
+Pilha P = pilha(5);    
+empilha(8,P);   
+while( topo(P)>0 ) empilha(topo(P)/2,P);    
+while( !vaziap(P) ) 
+printf("%.0f\n",desempilha(P));   
+destroip(&P);   
+return 0; 
+} 
+
+(a) Nunca termina. 
+(X) Causa um erro de pilha cheia. 
+(c) Causa um erro de pilha vazia. 
+(d) Causa a exibição de cinco números no vídeo. 
+
+6. [0,5] A forma posfixa da expressão infixa "A*B/C-D+E" é: 
+(X) "AB*C/D-E+" 
+(b) "AB*C/DE+-" 
+(c) "ABC/*D-E+" 
+(d) "ABC/*DE+-" 
+
+7. [0,5] O valor da expressão posfixa "384/+2*6-" é:
+(a) 2 
+(b) 3 
+(X) 4
+(d) Nenhuma das anteriores. 
+
+8. [0,5] Supondo que fila.h contém a implementação de Fila, podemos afirmar que a execução do programa a seguir: 
+#include <stdio.h> #include "fila.h" // fila de caracteres int main(void) {  
+Fila F = fila(3);   
+enfileira(125,F);   
+enfileira(126,F);    
+enfileira(127,F);    
+while( !vaziaf(F) ) {    
+int x = desenfileira(F);   
+if( x>0 ) enfileira(x+1,F);  
+else printf("%d\n",x);     }   
+destroif(&F);    
+return 0; }
+(X) Nunca termina.
+(b) Causa um erro de fila cheia.
+(c) Causa um erro de fila vazia. 
+(d) Causa a exibição de três números no vídeo. 
+ 
+9. [3,0] Seja E uma cadeia representando uma expressão lógica em notação posfixa, podendo conter apenas os caracteres F (falso), V (verdade), ~ (não), & (e) e | (ou). Usando uma pilha de inteiros e a função strchr(), para verificar se um caractere é um operando ou um operador, crie a função valor(E), que devolve o valor lógico de E.  Por exemplo, o programa a seguir deve exibir a saída V.  
+#include <stdio.h> #include <string.h> #include "pilha.h" // pilha de inteiros ... int main(void) {    printf("%c\n",valor("VFV~&|"));    return 0; }
+
+-----------------------
+SOLUÇÃO 1: 
+
+char valor(char *operacao) {
+	int i = 0; int operandoA, operandoB, resultado;
+	Pilha P = pilha(100);
+	while (operacao[i] != '\0') {
+		switch (operacao[i]) {
+			case 'V':
+				empilha(1, P); break;
+			case 'F':
+				empilha(0, P); break;
+			case '~':
+				operandoA = desempilha(P);
+				if (operandoA == 1) {
+					empilha(0, P);
+				} else {
+					empilha(1, P);} break;
+			case '&':
+				operandoA = desempilha(P);
+				operandoB = desempilha(P);
+				if (operandoA == 1 && operandoB == 1) {
+					empilha(1, P);
+				} else {
+					empilha(0, P); }
+				break;
+			case '|':
+				operandoA = desempilha(P);
+				operandoB = desempilha(P);
+				if (operandoA == 1 || operandoB == 1) {
+					empilha(1, P); } else {
+					empilha(0, P);
+				} break; } i++; }
+
+	resultado = desempilha(P);
+
+	if (resultado == 1) {
+		return 'V';
+	} else {
+		return 'F';
+	}
+}
+
+
+-----------------------
+SOLUÇÃO 2: 
+
+char valor(char *e)
+{
+    Pilha p = pilha(513);
+
+    for ( int I = 0 ; e[I] ; I++)
+        {
+        if (strchr("VF",e[I])) //SE V OU F, EMPILHO o valor 
+            { empilha (e[I],p); }
+
+        if (strchr("&|",e[I]) )
+            // se for uma operacao, eu desempilho as coisas e opero e guardo o resultado
+            {
+            char x;
+            char y;
+            switch(e[I]) {
+                 case '|': 
+                 { 
+                      y = desempilha(p); 
+                      x = desempilha(p); 
+                     if (x == 'V' || y == 'V') {empilha ('V', p); break; }
+                     else empilha ('F',p); break;
+                 }
+
+                case '&':
+                {     y = desempilha(p); 
+                      x = desempilha(p); 
+                     if (x == 'V' && y == 'V') {empilha ('V', p); break; }
+                     else empilha ('F',p); break;
+                }
+                 case '~':
+                {    y = desempilha(p);
+                     if (y == 'V') {empilha ('F', p); break; }
+                     else empilha ('V',p); break;
+                }
+                } //fim do switch 
+                } //fim do else if
+        } //fim do for
+    char z = desempilha(p);
+    destroip(&p);
+    return z;
+}
+
+10. [3,0] Seja F uma fila contendo uma série de itens em ordem arbitrária. Usando uma única pilha, crie a função ordenar() para reorganizar os itens de F, de modo que eles fiquem em ordem decrescente sem repetição. Por exemplo, o programa a seguir deve exibir a saída 5 4 3 2 1. 
+#include <stdio.h> 
+#include "fila.h"  // fila de inteiros 
+#include "pilha.h" // pilha de inteiros ... 
+int main(void) {   
+Fila F = fila(10);  
+int x[7] = {4, 2, 5, 1, 3, 2, 5};   
+for(int i=0; i<7; i++) enfileira(x[i],F);    
+ordenar(F);    
+while( !vaziaf(F) ) 
+printf("%d ", desenfileira(F));   
+destroif(&F);    
+return 0; }
+
+void ordena (Fila F)
+{
+  int x;
+  Pilha A = pilha(QTD);
+  Pilha B = pilha(QTD);
+  for (int i=0; i<QTD; i++)
+  {
+    x= F[i];
+    
+    while (!vaziap(A) && x<topo(A))    // pra virar decrescente, basta colocar x < topo(A)
+      empilha(desempilha(A),B);
+
+    if (vaziap(A) || x!=topo(A))
+        {empilha(x,A);}   // isso eh sem repeticao , pra manter a repeticao é só tirar a linha de cima e mandar empilhar de todo jeito 
+    
+    while (!vaziap(B))
+      empilha(desempilha(B),A);
+  }
+
+  while (!vaziap(A))
+    printf("%d ",desempilha(A));
+  
+}
