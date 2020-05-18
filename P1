@@ -87,47 +87,38 @@ return 0; }
 -----------------------
 SOLUÇÃO 1: 
 
-char valor(char *operacao) {
-	int i = 0; int operandoA, operandoB, resultado;
-	Pilha P = pilha(100);
-	while (operacao[i] != '\0') {
-		switch (operacao[i]) {
-			case 'V':
-				empilha(1, P); break;
-			case 'F':
-				empilha(0, P); break;
-			case '~':
-				operandoA = desempilha(P);
-				if (operandoA == 1) {
-					empilha(0, P);
-				} else {
-					empilha(1, P);} break;
-			case '&':
-				operandoA = desempilha(P);
-				operandoB = desempilha(P);
-				if (operandoA == 1 && operandoB == 1) {
-					empilha(1, P);
-				} else {
-					empilha(0, P); }
-				break;
-			case '|':
-				operandoA = desempilha(P);
-				operandoB = desempilha(P);
-				if (operandoA == 1 || operandoB == 1) {
-					empilha(1, P); } else {
-					empilha(0, P);
-				} break; } i++; }
 
-	resultado = desempilha(P);
+char calculaValor(Pilha P) {
+	char operador, operandoA, operandoB, resultado;
 
-	if (resultado == 1) {
-		return 'V';
-	} else {
-		return 'F';
+	switch (desempilha(P)){
+		case 'V':
+			return 'V';
+		case 'F':
+			return 'F';
+		case '~':
+			switch (calculaValor(P)) {
+				case 'V':
+					return 'F';
+				case 'F':
+					return 'V';
+			}
+		case '&':
+			operandoA = calculaValor(P);
+			operandoB = calculaValor(P);
+			if (operandoA == 'V' && operandoB == 'V') {
+				return 'V';
+			}
+			return 'F';
+		case '|':
+			operandoA = calculaValor(P);
+			operandoB = calculaValor(P);
+			if (operandoA == 'V' || operandoB == 'V') {
+				return 'V';
+			}
+			return 'F';
 	}
 }
-
-
 -----------------------
 SOLUÇÃO 2: 
 
