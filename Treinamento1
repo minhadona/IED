@@ -1,0 +1,1412 @@
+/* -----------
+
+███████████████████████████████████████████████████████████████████████████████████████████
+█─▄▄▄─█▄─▄▄▀█▄─▄██▀▄─████▄─▄███▄─▄█─▄▄▄▄█─▄─▄─██▀▄─████▄─▄▄─███▄─▄▄─█▄─▀─▄█▄─▄█▄─▄─▀█▄─▄▄─█
+█─███▀██─▄─▄██─███─▀─█████─██▀██─██▄▄▄▄─███─████─▀─█████─▄█▀████─▄█▀██▀─▀███─███─▄─▀██─▄█▀█
+▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀▄▄▀▄▄▀▀▀▄▄▄▄▄▀▄▄▄▀▄▄▄▄▄▀▀▄▄▄▀▀▄▄▀▄▄▀▀▀▄▄▄▄▄▀▀▀▄▄▄▄▄▀▄▄█▄▄▀▄▄▄▀▄▄▄▄▀▀▄▄▄▄▄▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   while( L != NULL ) {
+      printf("%d\n",L->item);
+      L = L->prox;
+   }
+}
+
+int main(void) {
+   Lista I = no(3,no(1,no(5,NULL)));
+   exibe(I);
+   return 0;
+}
+*/
+
+/* ----------- Altere a função exibe(), de modo que os itens da lista sejam exibidos entre colchetes e separados por vírgulas. A lista vazia deve ser exibida como []. 
+
+████████████████████████████████████████████████████████████████████████████
+█▄─▄▄─█▄─▀─▄█▄─▄█▄─▄─▀█▄─▄▄─███─▄▄▄─█─▄▄─█▄─▄███─▄▄▄─█─█─█▄─▄▄─█─▄─▄─█▄─▄▄─█
+██─▄█▀██▀─▀███─███─▄─▀██─▄█▀███─███▀█─██─██─██▀█─███▀█─▄─██─▄█▀███─████─▄█▀█
+▀▄▄▄▄▄▀▄▄█▄▄▀▄▄▄▀▄▄▄▄▀▀▄▄▄▄▄▀▀▀▄▄▄▄▄▀▄▄▄▄▀▄▄▄▄▄▀▄▄▄▄▄▀▄▀▄▀▄▄▄▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+int main(void) {
+   Lista I = no(3,no(1,no(5,NULL)));
+   exibe(I);
+   return 0;
+}
+*/
+
+/* ----------- TAMANHO DA LISTA 
+
+████████████████████████████████████████████████████████████████████████████████████████
+█─▄─▄─██▀▄─██▄─▀█▀─▄██▀▄─██▄─▀█▄─▄█─█─█─▄▄─███▄─▄▄▀██▀▄─████▄─▄███▄─▄█─▄▄▄▄█─▄─▄─██▀▄─██
+███─████─▀─███─█▄█─███─▀─███─█▄▀─██─▄─█─██─████─██─██─▀─█████─██▀██─██▄▄▄▄─███─████─▀─██
+▀▀▄▄▄▀▀▄▄▀▄▄▀▄▄▄▀▄▄▄▀▄▄▀▄▄▀▄▄▄▀▀▄▄▀▄▀▄▀▄▄▄▄▀▀▀▄▄▄▄▀▀▄▄▀▄▄▀▀▀▄▄▄▄▄▀▄▄▄▀▄▄▄▄▄▀▀▄▄▄▀▀▄▄▀▄▄▀
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+int tamanho(Lista L) {
+     int t = 0;
+     while (L) {
+        t++;
+        L = L->prox;
+     }
+     return t; 
+  }
+
+
+int main(void) {
+   Lista I = no(3,no(1,no(5,NULL)));
+   exibe(I);
+   printf("Tamanho = %d\n",tamanho(I));
+   return 0;
+}
+
+*/
+
+/* ----------- Gera lista aleatorias de 10 numeros de 0 a 100
+
+██████████████████████████████████████████████████████████████████████
+█▄─▄███▄─▄█─▄▄▄▄█─▄─▄─██▀▄─████▄─▄▄▀██▀▄─██▄─▀█▄─▄█▄─▄▄▀█─▄▄─█▄─▀█▀─▄█
+██─██▀██─██▄▄▄▄─███─████─▀─█████─▄─▄██─▀─███─█▄▀─███─██─█─██─██─█▄█─██
+▀▄▄▄▄▄▀▄▄▄▀▄▄▄▄▄▀▀▄▄▄▀▀▄▄▀▄▄▀▀▀▄▄▀▄▄▀▄▄▀▄▄▀▄▄▄▀▀▄▄▀▄▄▄▄▀▀▄▄▄▄▀▄▄▄▀▄▄▄▀
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+Lista aleatoria(int n, int m) {
+     Lista L = NULL;
+     while( n>0 ) {
+        L = no(rand()%m, L);
+        n--;
+     }
+     return L;
+  }
+
+int main(void) {
+   srand(time(NULL));
+   Lista A = aleatoria(10,100);
+   exibe(A);
+//daqui posso chamar funcao tamanho ou funcao soma 
+   return 0;
+}
+
+*/
+
+/* ----------- Adicione no programa do exercício anterior uma função para calcular a soma dos itens da lista. Por exemplo,  considerando que I aponta a lista de inteiros [3,1,5], a chamada  soma(I) deve devolver a resposta 9
+
+████████████████████████████████████████████████████████████████████████████████████████
+█─▄▄▄▄█─▄▄─█▄─▀█▀─▄██▀▄─████▄─▄█─▄─▄─█▄─▄▄─█▄─▀█▄─▄█─▄▄▄▄███▄─▄███▄─▄█─▄▄▄▄█─▄─▄─██▀▄─██
+█▄▄▄▄─█─██─██─█▄█─███─▀─█████─████─████─▄█▀██─█▄▀─██▄▄▄▄─████─██▀██─██▄▄▄▄─███─████─▀─██
+▀▄▄▄▄▄▀▄▄▄▄▀▄▄▄▀▄▄▄▀▄▄▀▄▄▀▀▀▄▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀▄▄▄▀▀▄▄▀▄▄▄▄▄▀▀▀▄▄▄▄▄▀▄▄▄▀▄▄▄▄▄▀▀▄▄▄▀▀▄▄▀▄▄▀
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+Item soma (Lista L) {
+  Item s =0; 
+  while (L) { 
+  s+= L->item; 
+  L=L->prox; 
+  }
+return s; 
+}
+
+
+int main(void) {
+   Lista I = no(3,no(1,no(5,NULL)));
+   exibe(I);
+   printf("Soma = %d\n",soma(I));
+   return 0;
+}
+
+/* ----------- Crie a função intervalo(n), que devolve uma lista com os inteiros consecutivos de 1 até n.
+
+███████████████████████████████████████████████████████████████████████████████
+█▄─▄█▄─▀█▄─▄█─▄─▄─█▄─▄▄─█▄─▄▄▀█▄─█─▄██▀▄─██▄─▄███─▄▄─███████▀░██▀▀▀▀▀██▄─▀█▄─▄█
+██─███─█▄▀─████─████─▄█▀██─▄─▄██▄▀▄███─▀─███─██▀█─██─████████░██████████─█▄▀─██
+▀▄▄▄▀▄▄▄▀▀▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀▄▄▀▄▄▀▀▀▄▀▀▀▄▄▀▄▄▀▄▄▄▄▄▀▄▄▄▄▀▀▀▀▀▀▀▄▄▄▀▀▀▀▀▀▀▀▄▄▄▀▀▄▄▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+Lista intervalo (int n) {
+Lista L = NULL; 
+  while (n>0) {
+    L = no(n,L);
+    n--; 
+      }
+return L; 
+}
+
+int main (void) {
+ Lista B = intervalo(5);
+ exibe(B); 
+  return 0;
+}
+
+*/
+
+/* ----------- Função que anexa lista
+
+█████████████████████████████████
+██▀▄─██▄─▀█▄─▄█▄─▄▄─█▄─▀─▄██▀▄─██
+██─▀─███─█▄▀─███─▄█▀██▀─▀███─▀─██
+▀▄▄▀▄▄▀▄▄▄▀▀▄▄▀▄▄▄▄▄▀▄▄█▄▄▀▄▄▀▄▄▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+
+void anexa(Lista *A, Lista B) {
+     if( !B ) return;
+     while( *A )
+        A = &(*A)->prox;
+     *A = B;
+  }
+
+int main(void) {
+   Lista H = no(4,no(2,NULL));
+   Lista I = no(3,no(1,no(5,NULL)));
+   printf("H = "); exibe(H);
+   printf("I = "); exibe(I);
+   printf("Pressione enter!!!!!!!!!!!!!");
+   getchar();
+   anexa(&H,I);
+   printf("H = "); exibe(H);
+   printf("I = "); exibe(I);
+   return 0;
+}
+
+*/
+
+/* ----------- Destruição de lista
+
+████████████████████████████████████████
+█▄─▄▄▀█▄─▄▄─█─▄▄▄▄█─▄─▄─█▄─▄▄▀█─▄▄─█▄─▄█
+██─██─██─▄█▀█▄▄▄▄─███─████─▄─▄█─██─██─██
+▀▄▄▄▄▀▀▄▄▄▄▄▀▄▄▄▄▄▀▀▄▄▄▀▀▄▄▀▄▄▀▄▄▄▄▀▄▄▄▀
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+int main(void) {
+	Lista Cao = no(3, no(5,no(1,NULL)));
+ 	exibe(Cao);
+	destroi(&Cao); 
+}
+*/
+
+/* ----------- Função ultimo(L), que devolve o último item da lista L (se L estiver vazia, erro fatal).
+
+███████████████████████████████████████████████████████████████
+█▄─██─▄█▄─▄███─▄─▄─█▄─▄█▄─▀█▀─▄█─▄▄─███▄─▄█─▄─▄─█▄─▄▄─█▄─▀█▀─▄█
+██─██─███─██▀███─████─███─█▄█─██─██─████─████─████─▄█▀██─█▄█─██
+▀▀▄▄▄▄▀▀▄▄▄▄▄▀▀▄▄▄▀▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▄▀▀▀▄▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀▄▄▄▀▄▄▄▀
+ 
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+Item ultimo (Lista L){
+	if (L==NULL) { 	
+	puts ("ERRO: a lista não pode estar vazia"); 
+	abort(); 
+				}
+	while (L->prox != NULL ) L = L->prox; 
+	return L-> item;
+}
+
+int main (void){
+	Lista I = no(3,no(1,no(5,no(1,NULL)))); 
+	exibe(I);
+	printf("ultimo: %d\n", ultimo(I));
+	return 0;
+}
+
+*/
+
+/* ----------- Função maximo(L), que devolve o maior item da lista L (se L estiver vazia, erro fatal).
+
+████████████████████████████████████████████████████████████████
+█▄─▀█▀─▄██▀▄─██▄─▀─▄█▄─▄█▄─▀█▀─▄█─▄▄─███▄─▄█─▄─▄─█▄─▄▄─█▄─▀█▀─▄█
+██─█▄█─███─▀─███▀─▀███─███─█▄█─██─██─████─████─████─▄█▀██─█▄█─██
+▀▄▄▄▀▄▄▄▀▄▄▀▄▄▀▄▄█▄▄▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▄▀▀▀▄▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀▄▄▄▀▄▄▄▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+
+Item maximo(Lista L) {
+	if (L==NULL) abort();
+	Item m = L->item;
+	L = L-> prox;
+	while (L) {
+		if ( m < L->item )   m = L->item; 
+		L = L->prox; 
+					} 
+	return m; 
+}
+
+int main(void) {
+	Lista (I) = no(3,no(100,no(5,NULL))); 
+	exibe(I);
+	printf("maximo: %d\n", maximo(I)); 
+	return 0;
+}
+
+*/
+
+/* ----------- função pertence(x,L), que verifica se o item x pertence à lista L.
+
+███████████████████████████████████████████████████████████
+█▄─▀─▄███▄─▄▄─█▄─▄▄─█▄─▄▄▀█─▄─▄─█▄─▄▄─█▄─▀█▄─▄█─▄▄▄─█▄─▄▄─█
+██▀─▀█████─▄▄▄██─▄█▀██─▄─▄███─████─▄█▀██─█▄▀─██─███▀██─▄█▀█
+▀▄▄█▄▄▀▀▀▄▄▄▀▀▀▄▄▄▄▄▀▄▄▀▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀▄▄▄▀▀▄▄▀▄▄▄▄▄▀▄▄▄▄▄▀
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+int pertence (Item x, Lista L){
+	while (L != NULL)  //correspondente a dizer while (L)
+ 						{
+			if (x== L->item) return 1;
+			L = L->prox; 
+					   }
+	return 0; 
+}
+
+int main (void) {
+	Lista L = no (5,no(2,no(1,no(7,NULL)))); 
+	exibe (L);
+	printf("%d ",pertence(5,L));
+	printf("%d ",pertence(3,L));
+	return 0;
+}
+
+*/
+
+/* ----------- função inversa(L), que cria e devolve uma cópia invertida da lista L. Por exemplo, se L for a lista [1,2,3], a chamada inversa(L) deve devolver a lista [3,2,1].
+
+█████████████████████████████████████████████████████████████████████████
+█▄─▄█▄─▀█▄─▄█▄─█─▄█▄─▄▄─█▄─▄▄▀█─▄─▄─█▄─▄▄─███▄─▄███▄─▄█─▄▄▄▄█─▄─▄─██▀▄─██
+██─███─█▄▀─███▄▀▄███─▄█▀██─▄─▄███─████─▄█▀████─██▀██─██▄▄▄▄─███─████─▀─██
+▀▄▄▄▀▄▄▄▀▀▄▄▀▀▀▄▀▀▀▄▄▄▄▄▀▄▄▀▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀▀▀▄▄▄▄▄▀▄▄▄▀▄▄▄▄▄▀▀▄▄▄▀▀▄▄▀▄▄▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+Lista inversa (Lista L){
+	Lista I =NULL;
+	while (L) {
+		I = no(L->item, I);
+		L = L->prox;
+				}
+	return I;
+}
+
+int main (void) {
+	Lista I = no(3,no(10,no(500,no(9,NULL)))); 
+	Lista J = inversa(I);
+	exibe(I);
+	exibe(J);
+	return 0;
+} 
+
+*/
+
+/* ----------- Crie a função intervalo(p,u), que cria e devolve uma lista contendo inteiros consecutivos de p até u (para p  u). Por exemplo, a chamada intervalo(-2,3) deve devolver a lista [-2,-1,0,1,2,3].  Se p  u, a função deve devolver uma lista vazia.
+
+█████████████████████████████████████████████████████████████████████████████
+█▄─▄█▄─▀█▄─▄█─▄─▄─█▄─▄▄─█▄─▄▄▀█▄─█─▄██▀▄─██▄─▄███─▄▄─█████▄─▀─▄█▀▀▀▀▀██▄─█─▄█
+██─███─█▄▀─████─████─▄█▀██─▄─▄██▄▀▄███─▀─███─██▀█─██─██████▀─▀██████████▄─▄██
+▀▄▄▄▀▄▄▄▀▀▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀▄▄▀▄▄▀▀▀▄▀▀▀▄▄▀▄▄▀▄▄▄▄▄▀▄▄▄▄▀▀▀▀▀▄▄█▄▄▀▀▀▀▀▀▀▀▀▄▄▄▀▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+Lista intervalo (int p, int u) {
+	Lista L = NULL; 
+	for (int x = u; x>=p ; x--) L= no(x,L);
+	return L;
+}
+
+int main (void) {
+	exibe(intervalo(1,8)); 
+	return 0;
+} 
+
+*/
+
+/* ----------- Crie a função recursiva len(L), que devolve o tamanho da lista L.
+
+█████████████████████████▀████████████████████████████████████████████████████████
+█▄─▄███▄─▄▄─█▄─▀█▄─▄█─▄▄▄▄█─▄─▄─█─█─███─▄─▄─██▀▄─██▄─▀█▀─▄██▀▄─██▄─▀█▄─▄█─█─█─▄▄─█
+██─██▀██─▄█▀██─█▄▀─██─██▄─███─███─▄─█████─████─▀─███─█▄█─███─▀─███─█▄▀─██─▄─█─██─█
+▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▄▀▀▄▄▀▄▄▄▄▄▀▀▄▄▄▀▀▄▀▄▀▀▀▀▄▄▄▀▀▄▄▀▄▄▀▄▄▄▀▄▄▄▀▄▄▀▄▄▀▄▄▄▀▀▄▄▀▄▀▄▀▄▄▄▄▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+int len (Lista L) {
+	if (L==NULL) return 0; 
+	return len (L->prox) +1; 
+}
+
+int main (void){
+	Lista I = no(3,no (4,no(5,NULL))); 
+	printf("length: %d", len(I)); 
+	return 0;
+
+}
+*/
+
+/* ----------- Crie a função recursiva sum(L), que devolve a soma dos itens da lista L.
+
+█████████████████████████████████████████████████
+█─▄▄▄▄█▄─██─▄█▄─▀█▀─▄███─▄▄▄▄█─▄▄─█▄─▀█▀─▄██▀▄─██
+█▄▄▄▄─██─██─███─█▄█─████▄▄▄▄─█─██─██─█▄█─███─▀─██
+▀▄▄▄▄▄▀▀▄▄▄▄▀▀▄▄▄▀▄▄▄▀▀▀▄▄▄▄▄▀▄▄▄▄▀▄▄▄▀▄▄▄▀▄▄▀▄▄▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+int sum (Lista L) { 
+	while (L==NULL) return 0; 
+	return sum(L->prox) + L-> item ;
+} 
+
+int main (void){
+	Lista I = no(3,no (4,no(10,NULL))); 
+	printf("sum: %d", sum(I)); 
+	return 0;
+}
+
+*/
+
+/* ----------- Crie a função recursiva clone(L), que devolve uma cópia da lista L.
+████████████████████████████████
+█─▄▄▄─█▄─▄███─▄▄─█▄─▀█▄─▄█▄─▄▄─█
+█─███▀██─██▀█─██─██─█▄▀─███─▄█▀█
+▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▄▄▀▄▄▄▀▀▄▄▀▄▄▄▄▄▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+Lista clone (Lista L) {
+	if (L==NULL) return NULL;
+	return no(L->item, clone(L->prox));
+}
+
+int main (void){
+	Lista I = no(3,no (4,no(5,NULL))); 
+	Lista C = clone(I); 
+	exibe(I);
+	exibe(C);
+	I->item = 100; 
+	exibe (I);
+	exibe(C); 
+	return 0;
+}
+
+*/
+
+/* ----------- Crie a função recursiva rnd(n,m), que devolve uma lista com n itens aleatórios em [0, m-1].
+
+████████████████████████████████████████████████████████████
+█▄─▄▄▀██▀▄─██▄─▀█▄─▄█▄─▄▄▀█─▄▄─█▄─▀█▀─▄███▄─▄▄▀█▄─▄▄─█─▄▄▄─█
+██─▄─▄██─▀─███─█▄▀─███─██─█─██─██─█▄█─█████─▄─▄██─▄█▀█─███▀█
+▀▄▄▀▄▄▀▄▄▀▄▄▀▄▄▄▀▀▄▄▀▄▄▄▄▀▀▄▄▄▄▀▄▄▄▀▄▄▄▀▀▀▄▄▀▄▄▀▄▄▄▄▄▀▄▄▄▄▄▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+Lista rnd (int n, int m) 
+{
+if (n==0) return NULL ;
+return no(rand()%m,rnd(n-1,m));
+}
+
+int main(void)
+{
+	puts("quantos numeros aleatorios vc quer gerar ?"); 
+	int n;
+	scanf("%d",&n);
+	puts("com qual limite maximo?"); 
+	int m;
+	scanf("%d", &m); 
+	exibe(rnd(n,m)); 
+	return 0;
+}
+*/
+
+/* ----------- Crie a função recursiva last(L), que devolve o último item da lista L.
+
+███████████████████████████████████████████████████████████████
+█▄─▄████▀▄─██─▄▄▄▄█─▄─▄─███▄─██─▄█▄─▄███─▄─▄─█▄─▄█▄─▀█▀─▄█─▄▄─█
+██─██▀██─▀─██▄▄▄▄─███─██████─██─███─██▀███─████─███─█▄█─██─██─█
+▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▄▄▀▀▄▄▄▀▀▀▀▀▄▄▄▄▀▀▄▄▄▄▄▀▀▄▄▄▀▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▄▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+Item last(Lista L)
+{
+if(L==NULL) abort(); 
+if (L->prox == NULL) return L->item; 
+return last(L->prox); 
+}
+
+
+int main (void){
+	Lista I = no(3,no (4,no(5,NULL))); 
+	printf("last: %d",last(I)); 
+	return 0;
+}
+
+*/
+
+/* ----------- Crie a função recursiva in(x,L), que  verifica se o item x está na lista L.
+
+█████████████████████████████████████████████████████████████████
+█▄─▄█▄─▀█▄─▄███▄─▄▄─█▄─▄▄─█▄─▄▄▀█─▄─▄─█▄─▄▄─█▄─▀█▄─▄█─▄▄▄─█▄─▄▄─█
+██─███─█▄▀─█████─▄▄▄██─▄█▀██─▄─▄███─████─▄█▀██─█▄▀─██─███▀██─▄█▀█
+▀▄▄▄▀▄▄▄▀▀▄▄▀▀▀▄▄▄▀▀▀▄▄▄▄▄▀▄▄▀▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀▄▄▄▀▀▄▄▀▄▄▄▄▄▀▄▄▄▄▄▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+int in(Item x, Lista L)
+{
+if (L==NULL) return 0; 
+if (x==L->item) return 1;
+return in(x,L->prox);
+}
+
+int main (void) {
+	Lista L = no (5,no(2,no(1,no(7,NULL)))); 
+	exibe (L);
+	printf("%d: ",in(5,L));
+	printf("%d: ",in(3,L));
+	return 0;
+}
+
+*/
+
+/* ----------- Crie a função recursiva nth(n,L), que devolve o enésimo (n1) item da lista L.
+
+████████████████████████████████████████████████████████████████████████████████
+█▄─▀█▄─▄█─▄─▄─█─█─███████████▄─▄▄─█▄─▄███▄─▄▄─█▄─▀█▀─▄█▄─▄▄─█▄─▀█▄─▄█─▄─▄─█─▄▄─█
+██─█▄▀─████─███─▄─████████████─▄█▀██─██▀██─▄█▀██─█▄█─███─▄█▀██─█▄▀─████─███─██─█
+▀▄▄▄▀▀▄▄▀▀▄▄▄▀▀▄▀▄▀▀▀▀▀▀▀▀▀▀▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▄▄▀▄▄▄▀▀▄▄▀▀▄▄▄▀▀▄▄▄▄▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+Item nth(int n, Lista L)
+{
+if (L==NULL || n<1) abort(); 
+if (n==1) return (L-> item); 
+return nth(n-1,L->prox);
+}
+
+int main (void) {
+	Lista L = no (5,no(2,no(1,no(7,NULL)))); 
+	exibe (L);
+	printf("ELEMENTO %d: ",in(3,L);
+	printf("ELEMENTO %d: ",in(4,L);
+	return 0;
+}
+
+*/
+
+/* ----------- Crie a função recursiva minimum(L), que devolve o menor item da lista L.
+
+█████████████████████████████████████████████████████████████████████████████████████████████
+█▄─▀█▀─▄█▄─▄█▄─▀█▄─▄█▄─▄█▄─▀█▀─▄█─▄▄─█████████▄─▀█▀─▄█▄─▄█▄─▀█▄─▄█▄─▄█▄─▀█▀─▄█▄─██─▄█▄─▀█▀─▄█
+██─█▄█─███─███─█▄▀─███─███─█▄█─██─██─██████████─█▄█─███─███─█▄▀─███─███─█▄█─███─██─███─█▄█─██
+▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▀▀▄▄▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▄▀▀▀▀▀▀▀▀▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▀▀▄▄▀▄▄▄▀▄▄▄▀▄▄▄▀▀▄▄▄▄▀▀▄▄▄▀▄▄▄▀
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+Item minimum (Lista L) {
+	if (L==NULL) abort(); 
+	Item m = L->item;
+	L = L-> prox;
+		while (L) {
+		if ( m > L->item )   m = L->item; 
+		L = L->prox; 
+					} 
+	return m; 
+
+} 
+
+int main (void) {
+	Lista L = no (-10,no(2,no(-1,no(7,NULL)))); 
+	exibe (L);
+	printf("minimum: %d ",minimum(L));
+	return 0;
+}
+
+
+*/
+
+/* ----------- Crie a função recursiva sorted(L), que verifica se a lista L está ordenada.
+███████████████████████████████████████████████
+█─▄▄▄▄█─▄▄─█▄─▄▄▀█─▄─▄─█▄─▄▄─█▄─▄▄▀███████▀▄▄▀█
+█▄▄▄▄─█─██─██─▄─▄███─████─▄█▀██─██─█████████▄██
+▀▄▄▄▄▄▀▄▄▄▄▀▄▄▀▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀▄▄▄▄▀▀▀▀▀▀▀▀▀▀▄▀▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+
+int sorted (Lista L)
+{
+ 	if (L==NULL || L->prox==NULL) return 1; 
+	if (L->item > L->prox->item) return 0; 
+	return (sorted(L->prox));
+}
+
+int main (void) {
+	Lista L = no (3,no(5,no(7,no(9,NULL)))); 
+	exibe (L);
+	printf("sorted? %d: ",sorted(L));
+	return 0;
+}
+
+*/
+
+/* ----------- Crie a função recursiva equal(A,B), que verifica se as listas A e B são iguais.
+
+███████████████████████████████████████████
+█▄─▄▄─█─▄▄▄─█▄─██─▄██▀▄─██▄─▄█████████▀▄▄▀█
+██─▄█▀█─██▀─██─██─███─▀─███─██▀█████████▄██
+▀▄▄▄▄▄▀───▄▄▀▀▄▄▄▄▀▀▄▄▀▄▄▀▄▄▄▄▄▀▀▀▀▀▀▀▀▀▄▀▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+Lista clone (Lista L) {
+	if (L==NULL) return NULL;
+	return no(L->item, clone(L->prox));
+}
+
+int equal (Lista A, Lista B)
+{
+if (A==NULL && B==NULL) return 1;
+if (A==NULL || B== NULL) return 0; 
+if (A->item != B->item) return 0;
+return equal (A->prox, B->prox); 
+}
+
+int main (void) {
+	Lista L = no (5,no(2,no(1,no(7,NULL)))); 
+	exibe (L);
+	Lista J = clone(L); 
+	exibe (J); 
+	printf("equal? %d: \n",equal(L,J));
+	J->item = 4;
+	exibe (L);
+	exibe (J);
+	printf("equal? %d: \n",equal(L,J));
+	return 0;
+}
+*/
+
+/* ----------- Crie a função recursiva count(x,L), que informa quantas vezes o item x ocorre na lista L.
+█████████████████████████████████████████████████████████████████████████████████████████████████████
+█─▄▄▄─█─▄▄─█▄─██─▄█▄─▀█▄─▄█─▄─▄─███████─▄▄─█─▄▄▄─█▄─██─▄█▄─▄▄▀█▄─▄▄▀█▄─▄▄─█▄─▀█▄─▄█─▄▄▄─█▄─▄▄─█─▄▄▄▄█
+█─███▀█─██─██─██─███─█▄▀─████─█████████─██─█─███▀██─██─███─▄─▄██─▄─▄██─▄█▀██─█▄▀─██─███▀██─▄█▀█▄▄▄▄─█
+▀▄▄▄▄▄▀▄▄▄▄▀▀▄▄▄▄▀▀▄▄▄▀▀▄▄▀▀▄▄▄▀▀▀▀▀▀▀▀▄▄▄▄▀▄▄▄▄▄▀▀▄▄▄▄▀▀▄▄▀▄▄▀▄▄▀▄▄▀▄▄▄▄▄▀▄▄▄▀▀▄▄▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▄▄▄▀
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+int count(int x,Lista L)
+{
+ 	if (L==NULL) return 0;
+	return count (x,L->prox) + (x== L->item); //se for igual, vai valer 1 pois eh verdadeiro, se nao for igual vai valer 0 pois o statement eh falso
+}
+
+
+int main (void) {
+	Lista L = no (1,no(2,no(1,no(7,NULL)))); 
+	exibe (L);
+	printf("count: %d: \n",count(1,L)); //resposta eh 2
+	Lista I = no (1,no(1,no(1,no(7,NULL)))); 
+	printf("count: %d: \n",count(1,I)); //resposta eh 3 
+	return 0;
+}
+*/
+
+/* ----------- Crie a função recursiva replace(x,y,L), que  substitui ocorrências de x por y na lista L.
+
+█████████████████████████████████████████████████████████████████████████████
+█▄─▄▄▀█▄─▄▄─█▄─▄▄─█▄─▄████▀▄─██─▄▄▄─█▄─▄▄─█████▄─▀─▄███▀▀▀▀▀██▀▀▀▀▀████▄─█─▄█
+██─▄─▄██─▄█▀██─▄▄▄██─██▀██─▀─██─███▀██─▄█▀██████▀─▀█████████████████████▄─▄██
+▀▄▄▀▄▄▀▄▄▄▄▄▀▄▄▄▀▀▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▄▄▀▄▄▄▄▄▀▀▀▀▀▄▄█▄▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄▄▄▀▀
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct no {
+   Item item;
+   struct no *prox;
+} *Lista;
+
+Lista no(Item x, Lista p) {
+   Lista n = malloc(sizeof(struct no));
+   n->item = x;
+   n->prox = p;
+   return n;
+}
+
+void exibe(Lista L) {
+   printf("[");
+   while( L != NULL ) {
+      printf("%d",L->item);
+	  if (L->prox != NULL) printf(","); 
+      L = L->prox;
+   }
+ printf("]\n");
+}
+
+void destroi(Lista *L) {
+     while( *L ) {
+        Lista n = *L;
+        *L = n->prox;
+        free(n);
+     }
+  }
+
+
+void replace (Item x, Item y, Lista L) {
+	if (L==NULL) return; 
+	if (x==L->item) L->item=y;
+	replace(x,y,L->prox);
+}
+
+int main (void) {
+	Lista L = no (5,no(2,no(1,no(7,NULL)))); 
+	exibe (L);
+	replace(5,1000,L);
+	exibe (L);
+	return 0;
+}
+*/
+
