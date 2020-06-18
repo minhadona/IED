@@ -1,0 +1,171 @@
+1. [0,5] É correto afirmar que a execução do programa a seguir: 
+
+#include <stdio.h> 
+int f(int n) {  
+if( n==1 ) return 0;   
+return f(n/2) + 1; 
+} 
+
+int main(void) {  
+printf("%d\n",f(256));  
+return 0; 
+} 
+
+(a) Nunca termina.
+(b) Termina com erro de stack overflow. 
+(X) Causa a exibição do número 8. 
+(d) Nenhuma das anteriores. 
+
+2. [0,5] A função ( ) , g m n , para , m n∈ℕ , é definida como segue: 
+
+g(m,n-m) se m<n
+g(m-n,n) se n>n
+m, caso contrário
+
+Qual a saída que a execução do programa a seguir produz no vídeo, após ser completado com a codificação desta função? 
+#include <stdio.h> 
+… 
+int main(void) {  
+printf("%d\n", g(34,12));  
+return 0; 
+} 
+
+(a) 1.
+(X) 2.
+(c) 3. 
+(d) 4.  
+ 
+3. [0,5] Analise as afirmações a seguir, sobre algoritmos de ordenação e busca, e indique a alternativa correta: 
+I. Em geral, Merge Sort é mais rápido que Bubble Sort. 
+II. Linear Search funciona com vetores desordenados.
+III. Binary Search só funciona com vetores ordenados. 
+
+(a) Apenas as afirmações I e II são verdadeiras. 
+(b) Apenas as afirmações I e III são verdadeiras. 
+(X) Apenas as afirmações II e III são verdadeiras. 
+(d) Nenhuma das anteriores. 
+
+4. [0,5] Para encontrar o item 64 no vetor {16,28,32,47,59,64,71,83,90,95}, quantos itens a busca binária precisa examinar?
+
+(a) Apenas um item. 
+(b) Apenas dois itens. 
+(X) Apenas três itens.
+(d) Nenhuma das anteriores. 
+
+5. [0,5] Indique a alternativa cuja afirmação é correta: 
+
+(a) Se o ponteiro p aponta a variável v, e o valor de v é alterado, então o valor de p também é alterado. 
+(X) Se o valor do ponteiro p for NULL, então a avaliação da expressão (p->item>x && p) causará um erro de execução. 
+(c) Se o ponteiro p aponta o primeiro nó da lista [5,3,7], após a execução de p++, a variável p->item terá o valor 3. 
+(d) Nenhuma das anteriores. 
+
+6. [0,5] A respeito do programa a seguir, é correto afirmar que: 
+#include <stdio.h> 
+#include <stdlib.h> 
+typedef struct node { 
+int item;    
+struct node *next; 
+} *List; 
+
+List node(int item, List next) { 
+List new = malloc(sizeof(struct node));  
+new->item = item;   
+new->next = next;   
+return new; } 
+
+void print(List L) {   
+printf("[");   
+while( L ) {     
+printf("%d", L->item);   
+if( L->next ) printf(",");     
+L = L->next;    }   
+printf("]\n"); } 
+
+int main(void) {   
+List A = node(5,node(1,node(3,NULL)));   
+List B = A;    
+print(A);    
+print(B);    
+return 0; }  
+
+(X) As variáveis A e B apontam a mesma lista encadeada. 
+(b) A variável B aponta uma cópia da lista apontada por A. 
+(c) Ele não pode ser compilado e executado corretamente. 
+(d) Nenhuma das anteriores. 
+
+7. [1,0] A função bs(x,v,n) deve fazer uma busca binária para descobrir se o item x está no vetor decrescente v, que tem n inteiros. Mostre como as lacunas no código, marcadas com A B C e D devem ser completadas para que ele funcione corretamente. 
+
+#include <stdio.h> 
+int rbs(int x, int v[], int i, int j) {  
+if( i>j ) return 0;   
+int m = (i+j)/2;  
+if( x<v[m] ) return rbs(x,v,A,B);   
+if( x>v[m] ) return rbs(x,v,C,D);   
+return 1; } 
+
+int bs(int x, int v[], int n) { 
+return rbs(x,v,0,n-1); }  
+
+int main(void) {   
+int v[9] = {90,82,79,64,51,46,35,27,13};    
+printf("bs(35,v,9) = %d\n", bs(35,v,9));   
+printf("bs(81,v,9) = %d\n", bs(81,v,9));   
+return 0; } 
+
+A) m+1,  B) j,  C) i,  D) m-1
+
+8. [2,0] O quadrado de um natural 1 n ≥ é a soma dos n primeiros ímpares consecutivos, ou seja, n^2 =1 + 3 + 5 + (2*n -1). Com base nesta definição, crie a função recursiva square(n), que devolve o quadrado de n. 
+
+int square(n) {  
+if (n==1) return 1;   
+return (2*n-1) + square(n-1); 
+}
+
+9. [2,0] Usando o tipo List e a função node(), da Questão 6, crie a função recursiva range(a,b), que devolve uma lista com todos os inteiros consecutivos de a até b. Por exemplo, completado corretamente com esta função e demais definições do programa na Questão 6, o programa a seguir deverá exibir as listas indicadas nos comentários. 
+#include <stdio.h> 
+#include <stdlib.h>
+… 
+int main(void) { 
+print(range(3,5));// deve exibir [3,4,5]    
+print(range(6,6)); // deve exibir [6]   
+print(range(8,7)); // deve exibir []    
+return 0; }
+
+List range(int p, int u) {   
+if (p>u) return NULL;  
+return node(p,range(p+1,u)); }
+
+10. [2,0] Usando o tipo List, da Questão 6, crie a função iterativa sorted(L), que devolve 1 se L é uma lista cujos itens estão ordenados de forma crescente e sem repetição (i.e., 1 2 n x x x < < < ⋯ ); ou 0, caso contrário. Por exemplo, completado corretamente com esta função e demais definições do programa na Questão 6, o programa a seguir deverá exibir as respostas indicadas nos comentários. 
+#include <stdio.h> 
+#include <stdlib.h> 
+… 
+int main(void) {   
+printf("%d\n", sorted(NULL));  // deve exibir 1  
+printf("%d\n", sorted(node(7,NULL))) // deve exibir 1  
+printf("%d\n", sorted(node(1,node(3,node(5,NULL)))));   // deve exibir 1  
+printf("%d\n", sorted(node(2,node(9,node(8,NULL)))));      // deve exibir 0   
+printf("%d\n", sorted(node(3,node(7,node(7,node(9,NULL)))))); // deve exibir 0    return 0; } 
+
+como eu fiz: (recursiva)
+
+int sorted(List L) {   
+if (L==NULL) return 1;    
+if (L->next == NULL) return 1;  
+if (L->item < L->next->item) return sorted(L->next);  
+return 0; 
+}
+
+resposta correta: (normal) 
+
+int sorted (List L) {
+while (L!= NULL && L->next!= NULL) {
+  if (L->item >= L->next->item) return 0;
+  L = L-> next;
+  } 
+return 1;
+} 
+
+
+
+
+}
