@@ -1,0 +1,172 @@
+1. [0,5] Analise as afirmações e indique a alternativa correta:
+  I. Toda árvore binária é também uma árvore de busca binária.
+  II. Toda árvore de busca binária é também uma árvore binária.
+  III. Numa árvore completa todas as folhas estão no mesmo nível.
+(a) Apenas as afirmações I e II são verdadeiras.
+(b) Apenas as afirmações I e III são verdadeiras.
+(X) Apenas as afirmações II e III são verdadeiras.
+(d) Nenhuma das anteriores. 
+
+2. [0,5] A respeito do programa a seguir, é correto afirmar que:
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct node {
+ struct node *left;
+ int item;
+ struct node *right;
+} *Tree;
+Tree tree(Tree left, int item, Tree right) {
+ Tree new = malloc(sizeof(struct node));
+ new->left = left;
+ new->item = item;
+ new->right = right;
+ return new;
+}
+void print(Tree T, int h) {
+ if( T==NULL ) return;
+ print(T->right, h+1);
+ printf("%*s%d\n", 3*h, "", T->item);
+ print(T->left, h+1);
+}
+int main(void) {
+ Tree A = tree(tree(tree(NULL,1,NULL),
+ 2,
+ tree(NULL,3,NULL)),
+ 4,
+ tree(tree(NULL,7,NULL),
+ 5,
+ tree(NULL,6,NULL)));
+ print(A,0);
+ return 0;
+}
+(a) A árvore apontada por A é uma árvore de busca binária.
+(x) A função print() percorre a árvore em ordem inversa.
+(c) A função print() percorre a árvore em ordem direta.
+(d) Ele não pode ser compilado e executado corretamente. 
+
+3. [0,5] Que composição da função tree(), definida na Questão 2,
+cria a árvore binária ilustrada a seguir?
+         1
+        /
+       2
+        \ 
+         3
+(a) tree(NULL,1,tree(NULL,2,tree(NULL,3,NULL))).
+(X) tree(tree(NULL,2,tree(NULL,3,NULL)),1,NULL).
+(c) tree(tree(NULL,2,NULL),1,tree(NULL,3,NULL)).
+(d) Nenhuma das anteriores. 
+
+4. [0,5] Se T aponta o ponteiro que aponta a raiz de uma árvore binária não vazia, que instrução exibe o item da raiz dessa árvore?
+(X) printf("%d",(*T)->item).
+(b) printf("%d",*T->item).
+(c) printf("%d",T->item).
+(d) printf("%d",*T.item). 
+
+5. [0,5] Num percurso do tipo pré-ordem, em que ordem os nós da
+árvore binária a seguir são visitados?
+
+               1
+             /    \ 
+            2      6 
+          /   \   /
+         4     5 3
+             
+(a) 1, 2, 6, 4, 5, 6.
+(b) 1, 6, 3, 2, 5, 4.
+(X) 1, 2, 4, 5, 6, 3.
+(d) Nenhuma das anteriores.
+
+6. [0,5] Que sequência de inserções, em uma árvore inicialmente
+vazia, resulta na criação da árvore de busca binária a seguir?
+ 
+          3
+       /     \
+      2       5 
+     /        / \
+    0       4   8
+     \         /
+      1       7
+             /
+            6
+
+(a) 3, 5, 4, 2, 8, 0, 6, 1, 7.
+(b) 3, 2, 5, 4, 8, 1, 7, 0, 6.
+(c) 3, 2, 0, 1, 5, 8, 4, 6, 7.
+(X) 3, 5, 4, 2, 8, 0, 7, 1, 6. 
+
+7. [1,0] A função make(v,i,j) deve criar uma árvore binária balanceada com os itens do subvetor v[i..j]. Mostre como as lacunas nesta função, marcadas com ♥, ♦, ♣ e ♠, devem ser completadas para que o programa gere a saída dada na figura ao lado.
+#include <stdio.h>
+#include <stdlib.h>
+… // tipos e funções definidos na Questão 2
+Tree make(int v[], int i, int j) {
+ if( i>j ) return NULL;
+ int m = (i+j)/2;
+ return tree(make(v,♥,♦),v[m],make(v,♣,♠));
+}
+int main(void) {
+ int v[7] = {10,20,30,40,50,60,70};
+ Tree A = make(v,0,6);
+ print(A,0);
+ return 0;
+}
+
+♥ = i
+♦ = m-1
+♣ = m+1
+♠ = j
+
+8. [2,0] Usando o tipo Tree e a função tree(), definidos na Questão 2, crie a função recursiva mirror(T), que devolve uma cópia
+espelhada da árvore binária cuja raiz é apontada pelo ponteiro T. Por exemplo, depois de completado corretamente com esta função e
+demais definições necessárias, o programa a seguir deverá produzir a saída indicada na figura ao lado.
+#include <stdio.h>
+#include <stdlib.h>
+…
+int main(void) {
+ Tree A = tree(tree(tree(NULL,1,NULL),2,NULL),3,tree(NULL,4,NULL));
+ print(A,0);
+ puts("-------");
+ print(mirror(A),0);
+ return 0;
+}
+
+Tree mirror(Tree A){
+ if (A==NULL) return NULL;
+ return tree(mirror(A->right), A->item, mirror(A->left)) ;
+}
+
+9. [2,0] Usando o tipo Tree, definido na Questão 2, crie a função recursiva minimum(T), que devolve o item mínimo de uma árvore de
+busca binária cuja raiz é apontada pelo ponteiro T. Por exemplo, depois de completado corretamente com esta função e demais
+definições necessárias, o programa a seguir deverá produzir a saída indicada no comentário.
+#include <stdio.h>
+#include <stdlib.h>
+…
+int main(void) {
+ Tree A = tree(tree(tree(NULL,1,tree(NULL,2,NULL)),3,NULL),4,tree(NULL,5,tree(NULL,6,NULL)));
+ printf("Minimum item: %d\n",minimum(A)); // deve exibir Minimum item: 1
+ return 0;
+} 
+
+int minimum(Tree A) {
+ if( A == NULL ) abort();
+ if( A->left == NULL ) return (A)->item;
+ return minimum(A->left);
+ }
+
+10. [2,0] Usando o tipo Tree, definido na Questão 2, crie a função recursiva leaves(T), que exibe em ordem crescente apenas os itens
+que são folhas na árvore de busca binária cuja raiz é apontada pelo ponteiro T. Por exemplo, depois de completado corretamente com
+esta função e demais definições necessárias, o programa a seguir deverá produzir a saída indicada no comentário.
+#include <stdio.h>
+#include <stdlib.h>
+…
+int main(void) {
+ Tree A = tree(tree(tree(NULL,1,NULL),2,tree(NULL,3,NULL)),4,tree(NULL,5,tree(NULL,6,NULL)));
+ leaves(A); // deve exibir 1 3 6
+ return 0;
+} 
+
+void leaves(Tree A) {
+ if( A==NULL ) return;
+ leaves(A->left);
+ if (A->left == NULL && A->right == NULL) printf("%d ",A->item);
+ leaves(A->right);
+}
