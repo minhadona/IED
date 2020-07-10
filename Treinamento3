@@ -1,0 +1,2021 @@
+
+
+/* 
+
+███████╗██╗░░██╗██╗██████╗░███████╗
+██╔════╝╚██╗██╔╝██║██╔══██╗██╔════╝
+█████╗░░░╚███╔╝░██║██████╦╝█████╗░░
+██╔══╝░░░██╔██╗░██║██╔══██╗██╔══╝░░
+███████╗██╔╝╚██╗██║██████╦╝███████╗
+╚══════╝╚═╝░░╚═╝╚═╝╚═════╝░╚══════╝ 
+Para criação e exibição de árvore binária
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+int main(void) {
+   Arv I = arv(arv(NULL,2,NULL),1,arv(NULL,3,arv(NULL,4,NULL)));
+   exibe(I,0);
+   return 0;
+}
+*/
+
+
+/*
+
+░█████╗░██████╗░██╗░█████╗░  ██████╗░███████╗██████╗░░██████╗░█████╗░███╗░░██╗
+██╔══██╗██╔══██╗██║██╔══██╗  ██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗████╗░██║
+██║░░╚═╝██████╔╝██║███████║  ██████╔╝█████╗░░██████╔╝╚█████╗░██║░░██║██╔██╗██║
+██║░░██╗██╔══██╗██║██╔══██║  ██╔═══╝░██╔══╝░░██╔══██╗░╚═══██╗██║░░██║██║╚████║
+╚█████╔╝██║░░██║██║██║░░██║  ██║░░░░░███████╗██║░░██║██████╔╝╚█████╔╝██║░╚███║
+░╚════╝░╚═╝░░╚═╝╚═╝╚═╝░░╚═╝  ╚═╝░░░░░╚══════╝╚═╝░░╚═╝╚═════╝░░╚════╝░╚═╝░░╚══╝
+CRIAR: 
+      1
+     / \
+    2   3 
+  /  \  
+4     5
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+int main(void) {
+   Arv I = arv( arv(   arv(NULL,4,NULL)  ,2, arv(NULL,5,NULL)   ), 1,    arv(NULL,3,NULL) );
+   exibe(I,0);
+   return 0;
+}
+*/
+
+/*
+
+/* 
+
+░█████╗░██████╗░██╗░█████╗░  ░█████╗░░█████╗░███╗░░░███╗██████╗░██╗░░░░░███████╗████████╗░█████╗░
+██╔══██╗██╔══██╗██║██╔══██╗  ██╔══██╗██╔══██╗████╗░████║██╔══██╗██║░░░░░██╔════╝╚══██╔══╝██╔══██╗
+██║░░╚═╝██████╔╝██║███████║  ██║░░╚═╝██║░░██║██╔████╔██║██████╔╝██║░░░░░█████╗░░░░░██║░░░███████║
+██║░░██╗██╔══██╗██║██╔══██║  ██║░░██╗██║░░██║██║╚██╔╝██║██╔═══╝░██║░░░░░██╔══╝░░░░░██║░░░██╔══██║
+╚█████╔╝██║░░██║██║██║░░██║  ╚█████╔╝╚█████╔╝██║░╚═╝░██║██║░░░░░███████╗███████╗░░░██║░░░██║░░██║
+░╚════╝░╚═╝░░╚═╝╚═╝╚═╝░░╚═╝  ░╚════╝░░╚════╝░╚═╝░░░░░╚═╝╚═╝░░░░░╚══════╝╚══════╝░░░╚═╝░░░╚═╝░░╚═╝
+Uma árvore binária completa é uma árvore binária em que todos os níveis estão completos 
+Crie funçao completa pra completar com numeros aleatorios em 3 niveis
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+Arv completa(int h) {
+   if( h==0 ) return NULL;
+   return arv(completa(h-1), rand()%100, completa(h-1));
+}
+
+int main(void) {
+   srand(time(NULL));
+   Arv A = completa(3);
+   exibe(A,0);
+   return 0;
+}
+*/
+
+
+
+/*
+
+░█████╗░██████╗░██╗░█████╗░  ██████╗░░█████╗░██╗░░░░░░█████╗░███╗░░██╗░█████╗░███████╗░█████╗░██████╗░░█████╗░
+██╔══██╗██╔══██╗██║██╔══██╗  ██╔══██╗██╔══██╗██║░░░░░██╔══██╗████╗░██║██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔══██╗
+██║░░╚═╝██████╔╝██║███████║  ██████╦╝███████║██║░░░░░███████║██╔██╗██║██║░░╚═╝█████╗░░███████║██║░░██║███████║
+██║░░██╗██╔══██╗██║██╔══██║  ██╔══██╗██╔══██║██║░░░░░██╔══██║██║╚████║██║░░██╗██╔══╝░░██╔══██║██║░░██║██╔══██║
+╚█████╔╝██║░░██║██║██║░░██║  ██████╦╝██║░░██║███████╗██║░░██║██║░╚███║╚█████╔╝███████╗██║░░██║██████╔╝██║░░██║
+░╚════╝░╚═╝░░╚═╝╚═╝╚═╝░░╚═╝  ╚═════╝░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝╚═╝░░╚══╝░╚════╝░╚══════╝╚═╝░░╚═╝╚═════╝░╚═╝░░╚═╝
+Crie a função balanceada(n), que devolve uma árvore balanceada com n itens aleatórios, e execute o programa a seguir.
+Uma árvore binária é balanceada se, para cada nó, a diferença entre o número de descendentes à esquerda e o número de descendentes à direita é no máximo 1. 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+Arv balanceada (int n) {
+   if (n==0) return NULL;
+   int ne = (n-1)/2 ; // se n for 5, o numero da esquerda eh 2 
+   return arv(   balanceada(ne),   rand()%100,    balanceada(n-1-ne)   ) ;
+}
+
+int main(void) {
+   srand(time(NULL));
+   exibe(balanceada(9),0);
+   return 0;
+}
+
+*/
+
+
+/*
+
+░█████╗░██╗░░░░░███████╗░█████╗░████████╗░█████╗░██████╗░██╗░█████╗░  ███╗░░██╗
+██╔══██╗██║░░░░░██╔════╝██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗██║██╔══██╗  ████╗░██║
+███████║██║░░░░░█████╗░░███████║░░░██║░░░██║░░██║██████╔╝██║███████║  ██╔██╗██║
+██╔══██║██║░░░░░██╔══╝░░██╔══██║░░░██║░░░██║░░██║██╔══██╗██║██╔══██║  ██║╚████║
+██║░░██║███████╗███████╗██║░░██║░░░██║░░░╚█████╔╝██║░░██║██║██║░░██║  ██║░╚███║
+╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚═╝░░░╚═╝░░░░╚════╝░╚═╝░░╚═╝╚═╝╚═╝░░╚═╝  ╚═╝░░╚══╝
+
+██╗████████╗███████╗███╗░░██╗░██████╗
+██║╚══██╔══╝██╔════╝████╗░██║██╔════╝
+██║░░░██║░░░█████╗░░██╔██╗██║╚█████╗░
+██║░░░██║░░░██╔══╝░░██║╚████║░╚═══██╗
+██║░░░██║░░░███████╗██║░╚███║██████╔╝
+╚═╝░░░╚═╝░░░╚══════╝╚═╝░░╚══╝╚═════╝░
+Crie a função aleatoria(n), que devolve uma árvore binária aleatória, com n itens aleatórios
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+Arv aleatoria(int n){
+   if (n==0) return NULL;
+   int ne = rand()%n; //0...n-1
+   return arv(aleatoria(ne),rand()%100, aleatoria(n-1-ne) );
+}
+
+
+int main(void) {
+   srand(time(NULL));
+   exibe(aleatoria(3),0);
+   return 0;
+}
+
+*/
+
+
+/*
+
+░██████╗░████████╗██████╗░  ██████╗░███████╗  ███╗░░██╗░█████╗░░██████╗
+██╔═══██╗╚══██╔══╝██╔══██╗  ██╔══██╗██╔════╝  ████╗░██║██╔══██╗██╔════╝
+██║██╗██║░░░██║░░░██║░░██║  ██║░░██║█████╗░░  ██╔██╗██║██║░░██║╚█████╗░
+╚██████╔╝░░░██║░░░██║░░██║  ██║░░██║██╔══╝░░  ██║╚████║██║░░██║░╚═══██╗
+░╚═██╔═╝░░░░██║░░░██████╔╝  ██████╔╝███████╗  ██║░╚███║╚█████╔╝██████╔╝
+░░░╚═╝░░░░░░╚═╝░░░╚═════╝░  ╚═════╝░╚══════╝  ╚═╝░░╚══╝░╚════╝░╚═════╝░
+
+██████╗░███████╗░█████╗░
+██╔══██╗██╔════╝██╔══██╗
+██████╔╝█████╗░░██║░░╚═╝
+██╔══██╗██╔══╝░░██║░░██╗
+██║░░██║███████╗╚█████╔╝
+╚═╝░░╚═╝╚══════╝░╚════╝░
+Crie a função recursiva nos(A), que devolve a quantidade de nós existentes na árvore binária A
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+int nos(Arv A){
+   if (A==NULL) return 0;
+   return 1 + nos (A->esq) +  nos (A->dir); // o 1 eh da raiz 
+}
+
+
+int main(void) {
+   Arv I = arv(arv(NULL,2,NULL),1,arv(NULL,3,arv(NULL,4,NULL)));
+   exibe(I,0);
+   printf("nos: %d\n", nos(I)); 
+   return 0;
+}
+*/
+
+/*
+
+░██████╗░█████╗░███╗░░░███╗░█████╗░  ██████╗░░█████╗░░██████╗  ██╗████████╗███████╗███╗░░██╗░██████╗
+██╔════╝██╔══██╗████╗░████║██╔══██╗  ██╔══██╗██╔══██╗██╔════╝  ██║╚══██╔══╝██╔════╝████╗░██║██╔════╝
+╚█████╗░██║░░██║██╔████╔██║███████║  ██║░░██║██║░░██║╚█████╗░  ██║░░░██║░░░█████╗░░██╔██╗██║╚█████╗░
+░╚═══██╗██║░░██║██║╚██╔╝██║██╔══██║  ██║░░██║██║░░██║░╚═══██╗  ██║░░░██║░░░██╔══╝░░██║╚████║░╚═══██╗
+██████╔╝╚█████╔╝██║░╚═╝░██║██║░░██║  ██████╔╝╚█████╔╝██████╔╝  ██║░░░██║░░░███████╗██║░╚███║██████╔╝
+╚═════╝░░╚════╝░╚═╝░░░░░╚═╝╚═╝░░╚═╝  ╚═════╝░░╚════╝░╚═════╝░  ╚═╝░░░╚═╝░░░╚══════╝╚═╝░░╚══╝╚═════╝░
+
+██████╗░███████╗░█████╗░
+██╔══██╗██╔════╝██╔══██╗
+██████╔╝█████╗░░██║░░╚═╝
+██╔══██╗██╔══╝░░██║░░██╗
+██║░░██║███████╗╚█████╔╝
+╚═╝░░╚═╝╚══════╝░╚════╝░
+Crie a função recursiva soma(A), que devolve a soma de todos os itens armazenados na árvore binária A.
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+Arv aleatoria(int n){
+   if (n==0) return NULL;
+   int ne = rand()%n; //0...n-1
+   return arv(aleatoria(ne),rand()%100, aleatoria(n-1-ne) );
+}
+
+Item soma(Arv A){
+   if (A==NULL) return 0;
+   return (A->item) + soma(A->esq) + soma(A->dir);
+}
+
+int main(void) {
+   srand(time(NULL));
+   Arv A = aleatoria(3);
+   exibe(A,0); 
+   printf("soma: %d\n", soma(A)); 
+   return 0;
+}
+
+*/
+
+
+/*
+
+███████╗░█████╗░██╗░░░░░██╗░░██╗░█████╗░░██████╗  ██████╗░███████╗░█████╗░
+██╔════╝██╔══██╗██║░░░░░██║░░██║██╔══██╗██╔════╝  ██╔══██╗██╔════╝██╔══██╗
+█████╗░░██║░░██║██║░░░░░███████║███████║╚█████╗░  ██████╔╝█████╗░░██║░░╚═╝
+██╔══╝░░██║░░██║██║░░░░░██╔══██║██╔══██║░╚═══██╗  ██╔══██╗██╔══╝░░██║░░██╗
+██║░░░░░╚█████╔╝███████╗██║░░██║██║░░██║██████╔╝  ██║░░██║███████╗╚█████╔╝
+╚═╝░░░░░░╚════╝░╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░  ╚═╝░░╚═╝╚══════╝░╚════╝░
+Crie a função recursiva folhas(A), que devolve a quantidade de folhas existentes na árvore binária A. 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+Arv aleatoria(int n){
+   if (n==0) return NULL;
+   int ne = rand()%n; //0...n-1
+   return arv(aleatoria(ne),rand()%100, aleatoria(n-1-ne) );
+}
+
+int folhas(Arv A){
+   if (A==NULL) return 0;
+   if(A->esq == NULL && A->dir == NULL) return 1;
+   return folhas(A->dir) + folhas(A->esq);
+}
+
+int main(void) {
+   srand(time(NULL));
+   Arv A = aleatoria(7);
+   exibe(A,0); 
+   printf("folhas: %d\n", folhas(A)); 
+   return 0;
+}
+*/ 
+
+
+
+/*
+
+░█████╗░██╗░░░░░████████╗██╗░░░██╗██████╗░░█████╗░  ██████╗░███████╗░█████╗░
+██╔══██╗██║░░░░░╚══██╔══╝██║░░░██║██╔══██╗██╔══██╗  ██╔══██╗██╔════╝██╔══██╗
+███████║██║░░░░░░░░██║░░░██║░░░██║██████╔╝███████║  ██████╔╝█████╗░░██║░░╚═╝
+██╔══██║██║░░░░░░░░██║░░░██║░░░██║██╔══██╗██╔══██║  ██╔══██╗██╔══╝░░██║░░██╗
+██║░░██║███████╗░░░██║░░░╚██████╔╝██║░░██║██║░░██║  ██║░░██║███████╗╚█████╔╝
+╚═╝░░╚═╝╚══════╝░░░╚═╝░░░░╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝  ╚═╝░░╚═╝╚══════╝░╚════╝░
+Crie a função recursiva altura(A), que devolve a altura de uma árvore binária A, supondo que árvore vazia tem altura 0
+No caso geral, a altura da árvore é igual a 1 + máximo entre as alturas de suas subárvores!
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <minmax.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+Arv aleatoria(int n){
+   if (n==0) return NULL;
+   int ne = rand()%n; //0...n-1
+   return arv(aleatoria(ne),rand()%100, aleatoria(n-1-ne) );
+}
+
+
+int altura(Arv A){
+   if (A==NULL) return 0;
+   return 1+ max(altura(A->esq), altura (A->dir) ); 
+}
+
+
+int main(void) {
+   srand(time(NULL));
+   Arv A = aleatoria(5);
+   exibe(A,0); 
+   printf("altura: %d\n", altura(A)); 
+   return 0;
+}
+
+*/
+
+/*
+
+░█████╗░██╗░░░░░░█████╗░███╗░░██╗███████╗  ██████╗░███████╗░█████╗░
+██╔══██╗██║░░░░░██╔══██╗████╗░██║██╔════╝  ██╔══██╗██╔════╝██╔══██╗
+██║░░╚═╝██║░░░░░██║░░██║██╔██╗██║█████╗░░  ██████╔╝█████╗░░██║░░╚═╝
+██║░░██╗██║░░░░░██║░░██║██║╚████║██╔══╝░░  ██╔══██╗██╔══╝░░██║░░██╗
+╚█████╔╝███████╗╚█████╔╝██║░╚███║███████╗  ██║░░██║███████╗╚█████╔╝
+░╚════╝░╚══════╝░╚════╝░╚═╝░░╚══╝╚══════╝  ╚═╝░░╚═╝╚══════╝░╚════╝░ 
+Crie a função recursiva clone(A), que devolve um clone (cópia) da árvore binária A. 
+No caso geral, clone da árvore é novo nó com a raiz, cujos filhos são os clones das subárvores!
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <minmax.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+Arv aleatoria(int n){
+   if (n==0) return NULL;
+   int ne = rand()%n; //0...n-1
+   return arv(aleatoria(ne),rand()%100, aleatoria(n-1-ne) );
+}
+
+Arv clone(Arv A){
+   if (A==NULL) return NULL; 
+   return arv(clone(A->esq), A->item, clone(A->dir)) ; 
+}
+
+
+int main(void) {
+   srand(time(NULL));
+   Arv A = aleatoria(5);
+   Arv B = A;
+   exibe(A,0); 
+   exibe(B,0); 
+   puts ("-----"); 
+   Arv C = clone(A);
+   A->item = 9 ; 
+   exibe(A,0);
+   exibe(B,0);
+   exibe(C,0);
+   return 0;
+}
+*/
+
+
+/*
+
+██████╗░███████╗██████╗░████████╗███████╗███╗░░██╗░█████╗░███████╗  ██████╗░███████╗░█████╗░
+██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔════╝████╗░██║██╔══██╗██╔════╝  ██╔══██╗██╔════╝██╔══██╗
+██████╔╝█████╗░░██████╔╝░░░██║░░░█████╗░░██╔██╗██║██║░░╚═╝█████╗░░  ██████╔╝█████╗░░██║░░╚═╝
+██╔═══╝░██╔══╝░░██╔══██╗░░░██║░░░██╔══╝░░██║╚████║██║░░██╗██╔══╝░░  ██╔══██╗██╔══╝░░██║░░██╗
+██║░░░░░███████╗██║░░██║░░░██║░░░███████╗██║░╚███║╚█████╔╝███████╗  ██║░░██║███████╗╚█████╔╝
+╚═╝░░░░░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝░░╚══╝░╚════╝░╚══════╝  ╚═╝░░╚═╝╚══════╝░╚════╝░
+Crie a função recursiva pertence(x,A), que determina se o item x pertence à árvore binária A.
+No caso geral, um item pertence a uma árvore se ele pertence à sua esquerda ou à sua direita!
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <minmax.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+Arv aleatoria(int n){
+   if (n==0) return NULL;
+   int ne = rand()%n; //0...n-1
+   return arv(aleatoria(ne),rand()%100, aleatoria(n-1-ne) );
+}
+
+
+int pertence (Item x, Arv A) {
+   if (A==NULL) return 0; 
+   if (x== A->item) return 1;
+   return (pertence (x,A->esq) || pertence (x,A->dir) ); 
+}
+
+
+int main(void) {
+   srand(time(NULL));
+   Arv A = arv(arv(NULL,2,NULL),1,arv(NULL,3,arv(NULL,4,NULL)));
+
+   printf("pertence? %d\n",pertence(5,A) ); 
+    printf("pertence? %d\n",pertence(1,A) ); 
+     printf("pertence? %d\n",pertence(4,A) ); 
+   return 0;
+}
+
+*/
+
+
+
+       1
+     /    \
+   2       3
+  / \     / \
+ 4   5   6   7
+        / \
+       8   9
+
+PREORDEM: 1 2 4 5 3 6 8 9 7 
+EM ORDEM: 4 2 5 1 8 6 9 3 7 
+POSORDEM: 4 5 2 8 9 6 7 3 1 
+
+/*
+██████╗░██████╗░███████╗    ░█████╗░██████╗░██████╗░███████╗███╗░░░███╗    ██████╗░███████╗░█████╗░
+██╔══██╗██╔══██╗██╔════╝    ██╔══██╗██╔══██╗██╔══██╗██╔════╝████╗░████║    ██╔══██╗██╔════╝██╔══██╗
+██████╔╝██████╔╝█████╗░░    ██║░░██║██████╔╝██║░░██║█████╗░░██╔████╔██║    ██████╔╝█████╗░░██║░░╚═╝
+██╔═══╝░██╔══██╗██╔══╝░░    ██║░░██║██╔══██╗██║░░██║██╔══╝░░██║╚██╔╝██║    ██╔══██╗██╔══╝░░██║░░██╗
+██║░░░░░██║░░██║███████╗    ╚█████╔╝██║░░██║██████╔╝███████╗██║░╚═╝░██║    ██║░░██║███████╗╚█████╔╝
+╚═╝░░░░░╚═╝░░╚═╝╚══════╝    ░╚════╝░╚═╝░░╚═╝╚═════╝░╚══════╝╚═╝░░░░░╚═╝    ╚═╝░░╚═╝╚══════╝░╚════╝░
+Crie a função recursiva preordem(A), que exibe a sequência pré-ordem da árvore binária A.
+R-E-D RED
+
+void preordem (Arv A) {
+   if (A==NULL) return ; 
+   printf("%d", A->item);              //raiz
+   preordem(A->esq);                   //esquerda
+   preordem(A->dir);                   //direita
+}
+*/
+
+/*
+
+███████╗███╗░░░███╗    ░█████╗░██████╗░██████╗░███████╗███╗░░░███╗  ██████╗░███████╗░█████╗░
+██╔════╝████╗░████║    ██╔══██╗██╔══██╗██╔══██╗██╔════╝████╗░████║  ██╔══██╗██╔════╝██╔══██╗
+█████╗░░██╔████╔██║    ██║░░██║██████╔╝██║░░██║█████╗░░██╔████╔██║  ██████╔╝█████╗░░██║░░╚═╝
+██╔══╝░░██║╚██╔╝██║    ██║░░██║██╔══██╗██║░░██║██╔══╝░░██║╚██╔╝██║  ██╔══██╗██╔══╝░░██║░░██╗
+███████╗██║░╚═╝░██║    ╚█████╔╝██║░░██║██████╔╝███████╗██║░╚═╝░██║  ██║░░██║███████╗╚█████╔╝
+╚══════╝╚═╝░░░░░╚═╝    ░╚════╝░╚═╝░░╚═╝╚═════╝░╚══════╝╚═╝░░░░░╚═╝  ╚═╝░░╚═╝╚══════╝░╚════╝░
+Crie a função recursiva emordem(A), que exibe a sequência em-ordem da árvore binária A.
+E-R-D ERD
+
+void emordem (Arv A) {
+   if (A==NULL) return ; 
+   emordem(A->esq);                   //esquerda 
+   printf("%d", A->item);             //raiz
+   emordem(A->dir);                   //direita
+}
+
+*/
+
+/*
+██████╗░░█████╗░░██████╗  ░█████╗░██████╗░██████╗░███████╗███╗░░░███╗  ██████╗░███████╗░█████╗░
+██╔══██╗██╔══██╗██╔════╝  ██╔══██╗██╔══██╗██╔══██╗██╔════╝████╗░████║  ██╔══██╗██╔════╝██╔══██╗
+██████╔╝██║░░██║╚█████╗░  ██║░░██║██████╔╝██║░░██║█████╗░░██╔████╔██║  ██████╔╝█████╗░░██║░░╚═╝
+██╔═══╝░██║░░██║░╚═══██╗  ██║░░██║██╔══██╗██║░░██║██╔══╝░░██║╚██╔╝██║  ██╔══██╗██╔══╝░░██║░░██╗
+██║░░░░░╚█████╔╝██████╔╝  ╚█████╔╝██║░░██║██████╔╝███████╗██║░╚═╝░██║  ██║░░██║███████╗╚█████╔╝
+╚═╝░░░░░░╚════╝░╚═════╝░  ░╚════╝░╚═╝░░╚═╝╚═════╝░╚══════╝╚═╝░░░░░╚═╝  ╚═╝░░╚═╝╚══════╝░╚════╝░
+Crie a função recursiva posordem(A), que exibe a sequência pós-ordem da árvore binária A.
+E-D-R EDR
+
+void posordem (Arv A) {
+   if (A==NULL) return ; 
+   posordem(A->esq);                   //esquerda 
+   posordem(A->dir);                   //direita
+   printf("%d", A->item);              //raiz
+}
+*/
+
+
+
+int main(void) {
+   srand(time(NULL));
+   Arv A = arv(arv(NULL,2,NULL),1,arv(NULL,3,arv(NULL,4,NULL)));
+  printf("pre ordem: \n",preordem(A)); 
+  printf("em ordem: \n", emordem(A)); 
+	printf("pos ordem: \n", posordem(A));
+	return 0;
+}
+
+
+
+/*
+███████╗███╗░░░███╗  ░█████╗░██████╗░██████╗░███████╗███╗░░░███╗  ██╗███╗░░██╗██╗░░░██╗
+██╔════╝████╗░████║  ██╔══██╗██╔══██╗██╔══██╗██╔════╝████╗░████║  ██║████╗░██║██║░░░██║
+█████╗░░██╔████╔██║  ██║░░██║██████╔╝██║░░██║█████╗░░██╔████╔██║  ██║██╔██╗██║╚██╗░██╔╝
+██╔══╝░░██║╚██╔╝██║  ██║░░██║██╔══██╗██║░░██║██╔══╝░░██║╚██╔╝██║  ██║██║╚████║░╚████╔╝░
+███████╗██║░╚═╝░██║  ╚█████╔╝██║░░██║██████╔╝███████╗██║░╚═╝░██║  ██║██║░╚███║░░╚██╔╝░░
+╚══════╝╚═╝░░░░░╚═╝  ░╚════╝░╚═╝░░╚═╝╚═════╝░╚══════╝╚═╝░░░░░╚═╝  ╚═╝╚═╝░░╚══╝░░░╚═╝░░░
+Crie a função recursiva eoi(A), que exibe a sequência em-ordem inversa da árvore binária A.
+*/
+
+void eoi(Arv A) {
+   if (A==NULL) return ; 
+   eoi(A->dir);                   //direita
+   printf("%d", A->item);         //raiz
+   eoi(A->esq);                   //esquerda 
+}
+
+// POS ORDEM INVERTIDA
+poi 
+
+void poi(Arv A) {
+   if (A==NULL) return ; 
+   poi(A->dir);                   //direita
+   poi(A->esq);                   //esquerda 
+   printf("%d", A->item);         //raiz
+}
+
+
+// PRE ORDEM INVERTIDA
+pei 
+
+void pei(Arv A) {
+   if (A==NULL) return ; 
+   printf("%d", A->item);         //raiz
+   pei(A->dir);                   //direita
+   pei(A->esq);                   //esquerda
+}
+
+
+int main(void) {
+  Arv A = arv(arv(NULL,2,NULL),1,arv(NULL,3,arv(NULL,4,NULL)));
+
+	exibe(A,0); 
+	puts("   ");
+  puts ("\npre ordem: ");
+  preordem(A); 
+  puts ("\nPRE ORDEM INVERTIDA: \n");
+	pei(A);
+  puts ("\em ordem: \n");
+  emordem(A); 
+
+  puts ("\nEM ORDEM INVERTIDA: \n");
+  eoi(A);
+  puts ("\npos ordem: \n");
+  posordem(A);
+
+	  puts ("\nPOS ORDEM INVERTIDA: \n");
+ 	poi(A);
+	
+	return 0;
+}
+
+
+/*
+██████╗░░█████╗░██████╗░░█████╗░
+██╔══██╗██╔══██╗██╔══██╗██╔══██╗
+██████╔╝██║░░██║██║░░██║███████║
+██╔═══╝░██║░░██║██║░░██║██╔══██║
+██║░░░░░╚█████╔╝██████╔╝██║░░██║
+╚═╝░░░░░░╚════╝░╚═════╝░╚═╝░░╚═╝
+Crie a função recursiva poda(&A), que remove todas, e só, as folhas de uma árvore binária A.
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+Arv aleatoria(int n) {
+   if( n==0 ) return NULL;
+   int ne = rand()%n;
+   return arv(aleatoria(ne),rand()%100,aleatoria(n-1-ne));
+}
+
+Arv balanceada(int n) {
+   if( n==0 ) return NULL;
+   int ne = (n-1)/2;
+   return arv(balanceada(ne),rand()%100,
+              balanceada(n-1-ne));
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+void poda(Arv *A) {
+   if( *A == NULL ) return;
+   if((*A)->esq == (*A)->dir ) {
+      free(*A);
+      *A = NULL;
+   }
+   else {
+      poda(&(*A)->dir);
+      poda(&(*A)->esq);
+   }
+}
+
+void destroi(Arv *A) {
+   if( *A == NULL ) return;
+   destroi(&(*A)->esq);
+   destroi(&(*A)->dir);
+   free(*A);
+   *A = NULL;
+}
+
+int main(void) {
+   Arv T = balanceada(9);
+   exibe(T,0);
+   puts("-----");
+   poda(&T);
+   exibe(T,0);
+   puts("-----");
+   destroi(&T);
+   exibe(T,0);
+   puts("-----");
+   return 0;
+}
+
+*/
+
+
+/*
+██████╗░███████╗░██████╗████████╗██████╗░░█████╗░██╗  ░█████╗░██████╗░██╗░░░██╗
+██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██║  ██╔══██╗██╔══██╗██║░░░██║
+██║░░██║█████╗░░╚█████╗░░░░██║░░░██████╔╝██║░░██║██║  ███████║██████╔╝╚██╗░██╔╝
+██║░░██║██╔══╝░░░╚═══██╗░░░██║░░░██╔══██╗██║░░██║██║  ██╔══██║██╔══██╗░╚████╔╝░
+██████╔╝███████╗██████╔╝░░░██║░░░██║░░██║╚█████╔╝██║  ██║░░██║██║░░██║░░╚██╔╝░░
+╚═════╝░╚══════╝╚═════╝░░░░╚═╝░░░╚═╝░░╚═╝░╚════╝░╚═╝  ╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░
+Crie a função recursiva destroi(&A), que destrói uma árvore binária A.
+//destroi esquerda, destroi direita, da free na raiz 
+// raiz tem q ser a ultima
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <minmax.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+
+void ins(Item x, Arv *A) {
+     if( *A == NULL ) *A = arv(NULL,x,NULL);
+     else if( x <= (*A)->item ) ins(x,&(*A)->esq);
+     else ins(x,&(*A)->dir);
+  }
+
+void destroi(Arv *A) {
+   if( *A == NULL ) return;
+   destroi(&(*A)->esq);
+   destroi(&(*A)->dir);
+   free(*A);
+   *A = NULL;
+}
+
+Arv balanceada(int n) {
+   if( n==0 ) return NULL;
+   int ne = (n-1)/2;
+   return arv(balanceada(ne),rand()%100,
+              balanceada(n-1-ne));
+}
+
+
+int main (void){
+  Arv T = balanceada(9);
+   exibe(T,0);
+   puts("-----");
+	destroi(&T); 
+	exibe(T,0);
+
+}
+*/
+
+
+/*
+░█████╗░░█████╗░███╗░░██╗████████╗░█████╗░  ██╗░░██╗  ███╗░░██╗░█████╗░  ░█████╗░██████╗░██╗░░░██╗
+██╔══██╗██╔══██╗████╗░██║╚══██╔══╝██╔══██╗  ╚██╗██╔╝  ████╗░██║██╔══██╗  ██╔══██╗██╔══██╗██║░░░██║
+██║░░╚═╝██║░░██║██╔██╗██║░░░██║░░░███████║  ░╚███╔╝░  ██╔██╗██║███████║  ███████║██████╔╝╚██╗░██╔╝
+██║░░██╗██║░░██║██║╚████║░░░██║░░░██╔══██║  ░██╔██╗░  ██║╚████║██╔══██║  ██╔══██║██╔══██╗░╚████╔╝░
+╚█████╔╝╚█████╔╝██║░╚███║░░░██║░░░██║░░██║  ██╔╝╚██╗  ██║░╚███║██║░░██║  ██║░░██║██║░░██║░░╚██╔╝░░
+░╚════╝░░╚════╝░╚═╝░░╚══╝░░░╚═╝░░░╚═╝░░╚═╝  ╚═╝░░╚═╝  ╚═╝░░╚══╝╚═╝░░╚═╝  ╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░
+Crie a função recursiva conta(x,A), que informa quantas vezes o item x ocorre na árvore A.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <minmax.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+Arv balanceada(int n) {
+   if( n==0 ) return NULL;
+   int ne = (n-1)/2;
+   return arv(balanceada(ne),rand()%100,
+              balanceada(n-1-ne));
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+
+void ins(Item x, Arv *A) {
+     if( *A == NULL ) *A = arv(NULL,x,NULL);
+     else if( x <= (*A)->item ) ins(x,&(*A)->esq);
+     else ins(x,&(*A)->dir);
+  }
+
+int conta(Item x, Arv A){
+   if (A == NULL) return 0; 
+   return (x == A-> item)  + conta(x,A->esq) + conta(x,A->dir); //pq retorna 1 + etc se o x tiver o valor da raiz, e retorna 0+etc se o x nao tiver o valor da raiz, entao retorna essa operacao booleana + conta + conta i
+}
+
+
+
+int main (void){
+  Arv T = balanceada(11);
+   exibe(T,0);
+   puts("-----");
+   printf("\n item aparece %d vezes",conta(87,T));
+	return 0;
+}
+
+*/
+
+
+/*
+██╗░██████╗░██╗░░░██╗░█████╗░██╗░██████╗
+██║██╔════╝░██║░░░██║██╔══██╗██║██╔════╝
+██║██║░░██╗░██║░░░██║███████║██║╚█████╗░
+██║██║░░╚██╗██║░░░██║██╔══██║██║░╚═══██╗
+██║╚██████╔╝╚██████╔╝██║░░██║██║██████╔╝
+╚═╝░╚═════╝░░╚═════╝░╚═╝░░╚═╝╚═╝╚═════╝░
+Crie a função recursiva iguais(A,B), que informa se as árvores binárias A e B são iguais.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <minmax.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+
+Arv balanceada(int n) {
+   if( n==0 ) return NULL;
+   int ne = (n-1)/2;
+   return arv(balanceada(ne),rand()%100,
+              balanceada(n-1-ne));
+}
+
+Arv clone(Arv A){
+   if (A==NULL) return NULL; 
+   return arv(clone(A->esq), A->item, clone(A->dir)) ; 
+} 
+void ins(Item x, Arv *A) {
+     if( *A == NULL ) *A = arv(NULL,x,NULL);
+     else if( x <= (*A)->item ) ins(x,&(*A)->esq);
+     else ins(x,&(*A)->dir);
+  }
+
+int iguais (Arv A, Arv B) {
+   if (A==NULL && B==NULL) return 1;
+   if (A==NULL || B==NULL) return 0;
+   if (A->item != B->item )  return 0;
+   return iguais (A->esq, B-> esq) && iguais (A->dir,B->dir);
+}
+
+int main(void)
+{
+	Arv T = balanceada(11);
+   exibe(T,0);
+	Arv R = clone(T);
+	exibe(R,0);
+	printf("sao iguais? %d\n",iguais(R,T));
+	R->dir->item = 42;
+	exibe(T,0);
+	exibe(R,0);
+		printf("sao iguais? %d\n",iguais(R,T));
+	return 0;
+}
+
+*/
+
+
+/*
+███████╗░█████╗░███████╗    ███████╗░██████╗██████╗░███████╗██╗░░░░░██╗░░██╗░█████╗░
+██╔════╝██╔══██╗╚════██║    ██╔════╝██╔════╝██╔══██╗██╔════╝██║░░░░░██║░░██║██╔══██╗
+█████╗░░███████║░░███╔═╝    █████╗░░╚█████╗░██████╔╝█████╗░░██║░░░░░███████║██║░░██║
+██╔══╝░░██╔══██║██╔══╝░░    ██╔══╝░░░╚═══██╗██╔═══╝░██╔══╝░░██║░░░░░██╔══██║██║░░██║
+██║░░░░░██║░░██║███████╗    ███████╗██████╔╝██║░░░░░███████╗███████╗██║░░██║╚█████╔╝
+╚═╝░░░░░╚═╝░░╚═╝╚══════╝    ╚══════╝╚═════╝░╚═╝░░░░░╚══════╝╚══════╝╚═╝░░╚═╝░╚════╝░
+Crie a função recursiva espelho(A), que devolve uma cópia espelhada da árvore binária A.
+
+     1                          1    
+    / \                        /  \
+   2   3      -------\        3    2
+  / \         -------/            / \
+ 4   5                           5   4
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+
+void ins(Item x, Arv *A) {
+     if( *A == NULL ) *A = arv(NULL,x,NULL);
+     else if( x <= (*A)->item ) ins(x,&(*A)->esq);
+     else ins(x,&(*A)->dir);
+  }
+
+int espelho (Arv A, Arv B){
+   if (A==NULL && B==NULL) return 1;
+   if (A==NULL || B==NULL) return 0;
+   if (A->item != B->item )  return 0;
+   return espelho(A->esq,B->dir) && espelho(A->dir,B->esq); 
+}
+
+Arv espelhu(Arv A){
+   if (A==NULL) return NULL; 
+   return arv(espelhu(A->dir), A->item, espelhu(A->esq)) ; 
+}
+
+int main (void){
+ Arv A = arv(arv(arv(NULL,1,NULL),3,arv(NULL,4,arv(NULL,5,NULL))),50,(arv(NULL,4,NULL)));
+ exibe(A,0);
+ Arv B = arv(arv(NULL,4,NULL),50,arv(arv(arv(NULL,5,NULL),4,NULL),3,arv(NULL,1,NULL)));
+ puts ("---------");
+ exibe (B,0);
+ printf("espelho? %d",espelho(A,B)); 
+ Arv C = espelhu(B); 
+  puts ("---------");
+ exibe(C,0);
+  return 0;
+}
+
+/*
+░█████╗░░█████╗░███╗░░██╗███████╗███████╗██████╗░███████╗  ███████╗░██████╗██████╗░███████╗██╗░░░░░██╗░░██╗░█████╗░
+██╔══██╗██╔══██╗████╗░██║██╔════╝██╔════╝██╔══██╗██╔════╝  ██╔════╝██╔════╝██╔══██╗██╔════╝██║░░░░░██║░░██║██╔══██╗
+██║░░╚═╝██║░░██║██╔██╗██║█████╗░░█████╗░░██████╔╝█████╗░░  █████╗░░╚█████╗░██████╔╝█████╗░░██║░░░░░███████║██║░░██║
+██║░░██╗██║░░██║██║╚████║██╔══╝░░██╔══╝░░██╔══██╗██╔══╝░░  ██╔══╝░░░╚═══██╗██╔═══╝░██╔══╝░░██║░░░░░██╔══██║██║░░██║
+╚█████╔╝╚█████╔╝██║░╚███║██║░░░░░███████╗██║░░██║███████╗  ███████╗██████╔╝██║░░░░░███████╗███████╗██║░░██║╚█████╔╝
+░╚════╝░░╚════╝░╚═╝░░╚══╝╚═╝░░░░░╚══════╝╚═╝░░╚═╝╚══════╝  ╚══════╝╚═════╝░╚═╝░░░░░╚══════╝╚══════╝╚═╝░░╚═╝░╚════╝░
+Crie a função recursiva espelho(A,B), que informa se a árvore A é espelho da árvore B.
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+
+void ins(Item x, Arv *A) {
+     if( *A == NULL ) *A = arv(NULL,x,NULL);
+     else if( x <= (*A)->item ) ins(x,&(*A)->esq);
+     else ins(x,&(*A)->dir);
+  }
+
+int espelho (Arv A, Arv B){
+   if (A==NULL && B==NULL) return 1;
+   if (A==NULL || B==NULL) return 0;
+   if (A->item != B->item )  return 0;
+   return espelho(A->esq,B->dir) && espelho(A->dir,B->esq); 
+}
+
+int main (void){
+ Arv A = arv(arv(arv(NULL,1,NULL),3,arv(NULL,4,arv(NULL,5,NULL))),50,(arv(NULL,4,NULL)));
+ exibe(A,0);
+ Arv B = arv(arv(NULL,4,NULL),50,arv(arv(arv(NULL,5,NULL),4,NULL),3,arv(NULL,1,NULL)));
+ puts ("---------");
+ exibe (B,0);
+ printf("espelho? %d",espelho(A,B)); 
+	return 0;
+}
+*/
+
+/*
+██╗░░░██╗███████╗████████╗░█████╗░██████╗░  ███████╗███╗░░░███╗  ░█████╗░██████╗░██╗░░░██╗
+██║░░░██║██╔════╝╚══██╔══╝██╔══██╗██╔══██╗  ██╔════╝████╗░████║  ██╔══██╗██╔══██╗██║░░░██║
+╚██╗░██╔╝█████╗░░░░░██║░░░██║░░██║██████╔╝  █████╗░░██╔████╔██║  ███████║██████╔╝╚██╗░██╔╝
+░╚████╔╝░██╔══╝░░░░░██║░░░██║░░██║██╔══██╗  ██╔══╝░░██║╚██╔╝██║  ██╔══██║██╔══██╗░╚████╔╝░
+░░╚██╔╝░░███████╗░░░██║░░░╚█████╔╝██║░░██║  ███████╗██║░╚═╝░██║  ██║░░██║██║░░██║░░╚██╔╝░░
+░░░╚═╝░░░╚══════╝░░░╚═╝░░░░╚════╝░╚═╝░░╚═╝  ╚══════╝╚═╝░░░░░╚═╝  ╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░
+Crie a função recursiva balanceada(v,p,u), que devolve uma árvore binária balanceada com os itens do vetor v, cujo primeiro item está na posição p e cujo último item está na posição u.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <minmax.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+
+void ins(Item x, Arv *A) {
+     if( *A == NULL ) *A = arv(NULL,x,NULL);
+     else if( x <= (*A)->item ) ins(x,&(*A)->esq);
+     else ins(x,&(*A)->dir);
+  }
+
+Arv balanceada(int v[], int p, int u) {
+   if (p>u) return NULL;
+   int m = (p+u)/2; 
+   return arv(balanceada(v,p,m-1),v[m],balanceada(v,m+1,u));
+}
+
+int main(void){
+   int v[7] = {31,41,59,12,5,6,1}; 
+   Arv A = balanceada(v,0,6); 
+   exibe(A,0); 
+   return 0;
+
+}
+
+*/
+
+
+
+
+/*
+
+██████╗░██╗░░░██╗░██████╗░█████╗░░█████╗░  ███████╗███╗░░░███╗  ░█████╗░██████╗░██╗░░░██╗  ░█████╗░██████╗░
+██╔══██╗██║░░░██║██╔════╝██╔══██╗██╔══██╗  ██╔════╝████╗░████║  ██╔══██╗██╔══██╗██║░░░██║  ██╔══██╗██╔══██╗
+██████╦╝██║░░░██║╚█████╗░██║░░╚═╝███████║  █████╗░░██╔████╔██║  ███████║██████╔╝╚██╗░██╔╝  ██║░░██║██████╔╝
+██╔══██╗██║░░░██║░╚═══██╗██║░░██╗██╔══██║  ██╔══╝░░██║╚██╔╝██║  ██╔══██║██╔══██╗░╚████╔╝░  ██║░░██║██╔══██╗
+██████╦╝╚██████╔╝██████╔╝╚█████╔╝██║░░██║  ███████╗██║░╚═╝░██║  ██║░░██║██║░░██║░░╚██╔╝░░  ╚█████╔╝██║░░██║
+╚═════╝░░╚═════╝░╚═════╝░░╚════╝░╚═╝░░╚═╝  ╚══════╝╚═╝░░░░░╚═╝  ╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░  ░╚════╝░╚═╝░░╚═╝
+
+BUSCA EM ÁRVORE DE BUSCA BINÁRIA:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <minmax.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+
+void ins(Item x, Arv *A) {
+     if( *A == NULL ) *A = arv(NULL,x,NULL);
+     else if( x <= (*A)->item ) ins(x,&(*A)->esq);
+     else ins(x,&(*A)->dir);
+  }
+  
+int busca(Item x, Arv A) {
+     if( A == NULL ) return 0;
+     if( x == A->item ) return 1;
+     if( x < A->item ) return busca(x,A->esq);
+     else return busca(x,A->dir);
+  }
+
+
+void emordem (Arv A) {
+   if (A==NULL) return ; 
+   emordem(A->esq);                   //esquerda 
+   printf("%d\n", A->item);             //raiz
+   emordem(A->dir);                   //direita
+}
+
+int main(void) {
+   int v[9] = {71,43,64,92,80,27,58,35,16};
+   Arv A = NULL;
+   for(int i=0; i<9; i++) ins(v[i],&A);
+	exibe(A,0);
+   emordem(A);
+   puts("\nPara sair, digite um inteiro negativo!");
+   while( 1 ) {
+      int x;
+      printf("\nItem a ser buscado? ");
+      scanf("%d",&x);
+      if( x<0 ) break;
+      if( busca(x,A) ) puts("Encontrado!");
+      else puts("Inexistente!"); 
+   }
+   return 0;
+}
+*/
+
+
+/*
+
+██████╗░███████╗███╗░░░███╗   ██╗████████╗███████╗███╗░░░███╗  ███╗░░░███╗░█████╗░██╗░░██╗
+██╔══██╗██╔════╝████╗░████║   ██║╚══██╔══╝██╔════╝████╗░████║  ████╗░████║██╔══██╗╚██╗██╔╝
+██████╔╝█████╗░░██╔████╔██║   ██║░░░██║░░░█████╗░░██╔████╔██║  ██╔████╔██║███████║░╚███╔╝░
+██╔══██╗██╔══╝░░██║╚██╔╝██║   ██║░░░██║░░░██╔══╝░░██║╚██╔╝██║  ██║╚██╔╝██║██╔══██║░██╔██╗░
+██║░░██║███████╗██║░╚═╝░██║   ██║░░░██║░░░███████╗██║░╚═╝░██║  ██║░╚═╝░██║██║░░██║██╔╝╚██╗
+╚═╝░░╚═╝╚══════╝╚═╝░░░░░╚═╝   ╚═╝░░░╚═╝░░░╚══════╝╚═╝░░░░░╚═╝  ╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚═╝
+REMOÇÃO DO ITEM MÁXIMO
+O ITEM MÁXIMO ESTA NO MAIS À DIREITA POSSÍVEL
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+
+void ins(Item x, Arv *A) {
+     if( *A == NULL ) *A = arv(NULL,x,NULL);
+     else if( x <= (*A)->item ) ins(x,&(*A)->esq);
+     else ins(x,&(*A)->dir);
+  }
+  
+
+Item remmax(Arv *A) {
+     if( *A == NULL ) abort();
+     if( (*A)->dir == NULL ) {
+        Arv n = *A;
+        Item x = n->item;
+        *A = n->esq;
+        free(n);
+        return x;
+     }
+     return remmax(&(*A)->dir);
+  }
+
+int main(void) {
+   int v[9] = {71,43,64,92,80,27,58,35,16};
+   Arv A = NULL;
+   for(int i=0; i<9; i++) ins(v[i],&A);
+   puts("Inicial");
+   exibe(A,0);
+   for(int i=0; i<9; i++) {
+      puts("Depois de remover o maximo");
+      remmax(&A);
+      exibe(A,0);
+      getchar();
+   }
+   return 0;
+}
+*/
+
+
+/*
+
+██████╗░███████╗███╗░░░███╗  ██████╗░░█████╗░  ██████╗░░█████╗░██╗███████╗
+██╔══██╗██╔════╝████╗░████║  ██╔══██╗██╔══██╗  ██╔══██╗██╔══██╗██║╚════██║
+██████╔╝█████╗░░██╔████╔██║  ██║░░██║███████║  ██████╔╝███████║██║░░███╔═╝
+██╔══██╗██╔══╝░░██║╚██╔╝██║  ██║░░██║██╔══██║  ██╔══██╗██╔══██║██║██╔══╝░░
+██║░░██║███████╗██║░╚═╝░██║  ██████╔╝██║░░██║  ██║░░██║██║░░██║██║███████╗
+╚═╝░░╚═╝╚══════╝╚═╝░░░░░╚═╝  ╚═════╝░╚═╝░░╚═╝  ╚═╝░░╚═╝╚═╝░░╚═╝╚═╝╚══════╝
+Remoção da raiz de uma árvore de busca binária
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <minmax.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+
+void ins(Item x, Arv *A) {
+     if( *A == NULL ) *A = arv(NULL,x,NULL);
+     else if( x <= (*A)->item ) ins(x,&(*A)->esq);
+     else ins(x,&(*A)->dir);
+  }
+
+Item remmax(Arv *A) {
+     if( *A == NULL ) abort();
+     if( (*A)->dir == NULL ) {
+        Arv n = *A;
+        Item x = n->item;
+        *A = n->esq;
+        free(n);
+        return x;
+     }
+     return remmax(&(*A)->dir);
+  }
+
+void remraiz(Arv *A) {
+   if( *A == NULL ) abort();
+   Arv n = *A;
+   if( n->esq == NULL ) *A = n->dir;
+   else if( n->dir == NULL ) *A = n->esq;
+   else n->item = remmax(&n->esq);
+   if( n != *A ) free(n);
+}
+
+int main (void){
+ Arv A = arv(arv(arv(NULL,1,NULL),3,arv(NULL,7,arv(NULL,5,arv(NULL,3,NULL)))),50,(arv(NULL,4,arv(NULL,4,arv(arv(NULL,9,NULL),8,NULL)))) );
+
+ exibe(A,0);
+	puts("-----");
+
+	remraiz(&A);
+	exibe(A,0);
+	return 0;
+}
+*/
+
+
+/*
+
+██████╗░███████╗███╗░░░███╗  ██╗████████╗███████╗███╗░░░███╗  ███████╗░██████╗██████╗░███████╗░█████╗░
+██╔══██╗██╔════╝████╗░████║  ██║╚══██╔══╝██╔════╝████╗░████║  ██╔════╝██╔════╝██╔══██╗██╔════╝██╔══██╗
+██████╔╝█████╗░░██╔████╔██║  ██║░░░██║░░░█████╗░░██╔████╔██║  █████╗░░╚█████╗░██████╔╝█████╗░░██║░░╚═╝
+██╔══██╗██╔══╝░░██║╚██╔╝██║  ██║░░░██║░░░██╔══╝░░██║╚██╔╝██║  ██╔══╝░░░╚═══██╗██╔═══╝░██╔══╝░░██║░░██╗
+██║░░██║███████╗██║░╚═╝░██║  ██║░░░██║░░░███████╗██║░╚═╝░██║  ███████╗██████╔╝██║░░░░░███████╗╚█████╔╝
+╚═╝░░╚═╝╚══════╝╚═╝░░░░░╚═╝  ╚═╝░░░╚═╝░░░╚══════╝╚═╝░░░░░╚═╝  ╚══════╝╚═════╝░╚═╝░░░░░╚══════╝░╚════╝░
+Remoçao de um item específico da árvore binária 
+Remoção em árvore de busca binária
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void remraiz(Arv *A) {
+   if( *A == NULL ) abort();
+   Arv n = *A;
+   if( n->esq == NULL ) *A = n->dir;
+   else if( n->dir == NULL ) *A = n->esq;
+   else n->item = remmax(&n->esq);
+   if( n != *A ) free(n);
+} 
+
+Item remmax(Arv *A) {
+     if( *A == NULL ) abort();
+     if( (*A)->dir == NULL ) {
+        Arv n = *A;
+        Item x = n->item;
+        *A = n->esq;
+        free(n);
+        return x;
+     }
+     return remmax(&(*A)->dir);
+  }
+  
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+
+void ins(Item x, Arv *A) {
+     if( *A == NULL ) *A = arv(NULL,x,NULL);
+     else if( x <= (*A)->item ) ins(x,&(*A)->esq);
+     else ins(x,&(*A)->dir);
+  }
+void rem(Item x, Arv *A) {
+   if( *A == NULL ) return;
+   if( x == (*A)->item ) remraiz(A);
+   else if( x < (*A)->item ) rem(x,&(*A)->esq);
+   else rem(x,&(*A)->dir);
+}
+
+int main(void) {
+   int v[9] = {71,43,64,92,80,27,58,35,16};
+   Arv A = NULL;
+   for(int i=0; i<9; i++) ins(v[i],&A);
+   puts("Inicial");
+   exibe(A,0);
+   for(int i=0; i<9; i++) {
+      printf("Depois de remover o item %d\n",v[i]);
+      rem(v[i],&A);
+      exibe(A,0);
+      getchar();
+   }
+   return 0;
+}
+
+
+*/
+
+
+
+/* 
+
+██╗███╗░░██╗░██████╗███████╗██████╗░███████╗  ░██████╗███████╗  ███╗░░██╗  ████████╗███████╗███╗░░░███╗
+██║████╗░██║██╔════╝██╔════╝██╔══██╗██╔════╝  ██╔════╝██╔════╝  ████╗░██║  ╚══██╔══╝██╔════╝████╗░████║
+██║██╔██╗██║╚█████╗░█████╗░░██████╔╝█████╗░░  ╚█████╗░█████╗░░  ██╔██╗██║  ░░░██║░░░█████╗░░██╔████╔██║
+██║██║╚████║░╚═══██╗██╔══╝░░██╔══██╗██╔══╝░░  ░╚═══██╗██╔══╝░░  ██║╚████║  ░░░██║░░░██╔══╝░░██║╚██╔╝██║
+██║██║░╚███║██████╔╝███████╗██║░░██║███████╗  ██████╔╝███████╗  ██║░╚███║  ░░░██║░░░███████╗██║░╚═╝░██║
+╚═╝╚═╝░░╚══╝╚═════╝░╚══════╝╚═╝░░╚═╝╚══════╝  ╚═════╝░╚══════╝  ╚═╝░░╚══╝  ░░░╚═╝░░░╚══════╝╚═╝░░░░░╚═╝
+
+Crie a função recursiva ins_sr(x,A), que insere o item x na árvore de busca binária A se, e somente se, esse item não estiver em A.
+REVER
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <minmax.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+
+void ins(Item x, Arv *A) {
+     if( *A == NULL ) *A = arv(NULL,x,NULL);
+     else if( x <= (*A)->item ) ins(x,&(*A)->esq);
+     else ins(x,&(*A)->dir);
+  }
+
+void ins_sr(Item x, Arv *A){
+   if (*A == NULL) *A = arv(NULL,x,NULL); 
+   else if( x<  (*A)->item ) ins(x, &(*A)->esq);
+   else if ( x>  (*A)->item ) ins (x, &(*A)->dir) ;
+}
+
+int main(void){
+   Arv A = NULL;
+   ins_sr(5, &A);
+   ins_sr(1, &A);
+   ins_sr(0,&A);
+   ins_sr(3,&A);
+   ins_sr(1,&A);
+   exibe(A,0);
+   return 0;
+}
+
+
+*/
+
+/*
+
+██████╗░███████╗███╗░░░███╗  ████████╗██████╗░  ░█████╗░░█████╗░░█████╗░██████╗░██████╗░███████╗
+██╔══██╗██╔════╝████╗░████║  ╚══██╔══╝██╔══██╗  ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝
+██████╔╝█████╗░░██╔████╔██║  ░░░██║░░░██║░░██║  ██║░░██║██║░░╚═╝██║░░██║██████╔╝██████╔╝█████╗░░
+██╔══██╗██╔══╝░░██║╚██╔╝██║  ░░░██║░░░██║░░██║  ██║░░██║██║░░██╗██║░░██║██╔══██╗██╔══██╗██╔══╝░░
+██║░░██║███████╗██║░╚═╝░██║  ░░░██║░░░██████╔╝  ╚█████╔╝╚█████╔╝╚█████╔╝██║░░██║██║░░██║███████╗
+╚═╝░░╚═╝╚══════╝╚═╝░░░░░╚═╝  ░░░╚═╝░░░╚═════╝░  ░╚════╝░░╚════╝░░╚════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚══════╝
+Crie a função recursiva rem_todos(x,A), que remove todas as ocorrências do item x na árvore  de busca binária A.
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+
+void ins(Item x, Arv *A) {
+     if( *A == NULL ) *A = arv(NULL,x,NULL);
+     else if( x <= (*A)->item ) ins(x,&(*A)->esq);
+     else ins(x,&(*A)->dir);
+  }
+
+void ins_sr(Item x, Arv *A){
+   if (*A == NULL) *A = arv(NULL,x,NULL); 
+   else if( x<  (*A)->item ) ins(x, &(*A)->esq);
+   else if ( x>  (*A)->item ) ins (x, &(*A)->dir) ;
+}
+void remraiz(Arv *A) {
+   if( *A == NULL ) abort();
+   Arv n = *A;
+   if( n->esq == NULL ) *A = n->dir;
+   else if( n->dir == NULL ) *A = n->esq;
+   else n->item = remmax(&n->esq);
+   if( n != *A ) free(n);
+} 
+
+Item remmax(Arv *A) {
+     if( *A == NULL ) abort();
+     if( (*A)->dir == NULL ) {
+        Arv n = *A;
+        Item x = n->item;
+        *A = n->esq;
+        free(n);
+        return x;
+     }
+     return remmax(&(*A)->dir);
+  }
+void rem_todos(Item x, Arv *A) {
+   if( *A == NULL ) return;
+   while ( x == (*A)->item ) remraiz(A);
+   if( x <= (*A)->item ) rem_todos(x,&(*A)->esq);
+   else rem_todos(x,&(*A)->dir);
+}
+
+int main(void){
+   Arv A = NULL;
+   ins_sr(5, &A);
+   ins_sr(1, &A);
+   ins_sr(0,&A);
+   ins_sr(3,&A);
+   ins_sr(1,&A);
+    ins_sr(3,&A);
+     ins_sr(3,&A);
+      ins_sr(3,&A);
+
+   exibe(A,0);
+   rem_todos(1,&A);
+   puts("----------");
+   exibe(A,0);
+
+   return 0;
+}
+
+*/
+
+/*
+
+███████╗██╗░░██╗██╗██████╗░███████╗  ██████╗░███████╗░█████╗░██████╗░███████╗░██████╗░█████╗░███████╗███╗░░██╗
+██╔════╝╚██╗██╔╝██║██╔══██╗██╔════╝  ██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔════╝██╔════╝██╔══██╗██╔════╝████╗░██║
+█████╗░░░╚███╔╝░██║██████╦╝█████╗░░  ██║░░██║█████╗░░██║░░╚═╝██████╔╝█████╗░░╚█████╗░██║░░╚═╝█████╗░░██╔██╗██║
+██╔══╝░░░██╔██╗░██║██╔══██╗██╔══╝░░  ██║░░██║██╔══╝░░██║░░██╗██╔══██╗██╔══╝░░░╚═══██╗██║░░██╗██╔══╝░░██║╚████║
+███████╗██╔╝╚██╗██║██████╦╝███████╗  ██████╔╝███████╗╚█████╔╝██║░░██║███████╗██████╔╝╚█████╔╝███████╗██║░╚███║
+╚══════╝╚═╝░░╚═╝╚═╝╚═════╝░╚══════╝  ╚═════╝░╚══════╝░╚════╝░╚═╝░░╚═╝╚══════╝╚═════╝░░╚════╝░╚══════╝╚═╝░░╚══╝
+Crie a função recursiva exibe_dec(A), que exibe todos os itens da árvore de busca binária A, em ordem decrescente. 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void ins(Item x, Arv *A) {
+     if( *A == NULL ) *A = arv(NULL,x,NULL);
+     else if( x <= (*A)->item ) ins(x,&(*A)->esq);
+     else ins(x,&(*A)->dir);
+  }
+
+void ins_sr(Item x, Arv *A){
+   if (*A == NULL) *A = arv(NULL,x,NULL); 
+   else if( x<  (*A)->item ) ins(x, &(*A)->esq);
+   else if ( x>  (*A)->item ) ins (x, &(*A)->dir) ;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->esq,n);
+   printf("%*s%d ",n,"",A->item);
+   exibe(A->dir,n);
+}
+
+int main(void){
+   Arv A = NULL;
+   ins_sr(5, &A);
+   ins_sr(1, &A);
+   ins_sr(0,&A);
+   ins_sr(3,&A);
+   ins_sr(1,&A);
+   exibe(A,0);
+   return 0;
+}
+*/
+
+/*
+
+██████╗░███████╗██╗░░░██╗░█████╗░██╗░░░░░██╗░░░██╗███████╗  ███╗░░░███╗░█████╗░██╗░░██╗
+██╔══██╗██╔════╝██║░░░██║██╔══██╗██║░░░░░██║░░░██║██╔════╝  ████╗░████║██╔══██╗╚██╗██╔╝
+██║░░██║█████╗░░╚██╗░██╔╝██║░░██║██║░░░░░╚██╗░██╔╝█████╗░░  ██╔████╔██║███████║░╚███╔╝░
+██║░░██║██╔══╝░░░╚████╔╝░██║░░██║██║░░░░░░╚████╔╝░██╔══╝░░  ██║╚██╔╝██║██╔══██║░██╔██╗░
+██████╔╝███████╗░░╚██╔╝░░╚█████╔╝███████╗░░╚██╔╝░░███████╗  ██║░╚═╝░██║██║░░██║██╔╝╚██╗
+╚═════╝░╚══════╝░░░╚═╝░░░░╚════╝░╚══════╝░░░╚═╝░░░╚══════╝  ╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚═╝
+Crie a função recursiva maximo(A), que devolve o maior item da árvore de busca binária A. 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+
+void ins(Item x, Arv *A) {
+     if( *A == NULL ) *A = arv(NULL,x,NULL);
+     else if( x <= (*A)->item ) ins(x,&(*A)->esq);
+     else ins(x,&(*A)->dir);
+  }
+  
+
+Item maximo(Arv *A) {
+     if( *A == NULL ) abort();
+     if( (*A)->dir == NULL ) {
+        return (*A)->item;
+     }
+     return maximo(&(*A)->dir);
+  }
+
+int main(void) {
+   int v[11] = {71,43,64,92,80,27,58,35,16,100,133};
+   Arv A = NULL;
+   for(int i=0; i<11; i++) ins(v[i],&A);
+   puts("Inicial");
+   exibe(A,0);
+   printf ("o maximo eh: %d\n",maximo(&A));
+   return 0;
+}
+*/
+
+/*
+
+██████╗░███████╗██╗░░░██╗░█████╗░██╗░░░░░██╗░░░██╗███████╗  ███╗░░░███╗██╗███╗░░██╗
+██╔══██╗██╔════╝██║░░░██║██╔══██╗██║░░░░░██║░░░██║██╔════╝  ████╗░████║██║████╗░██║
+██║░░██║█████╗░░╚██╗░██╔╝██║░░██║██║░░░░░╚██╗░██╔╝█████╗░░  ██╔████╔██║██║██╔██╗██║
+██║░░██║██╔══╝░░░╚████╔╝░██║░░██║██║░░░░░░╚████╔╝░██╔══╝░░  ██║╚██╔╝██║██║██║╚████║
+██████╔╝███████╗░░╚██╔╝░░╚█████╔╝███████╗░░╚██╔╝░░███████╗  ██║░╚═╝░██║██║██║░╚███║
+╚═════╝░╚══════╝░░░╚═╝░░░░╚════╝░╚══════╝░░░╚═╝░░░╚══════╝  ╚═╝░░░░░╚═╝╚═╝╚═╝░░╚══╝
+Crie a função recursiva minimo(A), que devolve o menor item da árvore de busca binária A. 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+typedef int Item;
+
+typedef struct arv {
+   struct arv *esq;
+   Item item;
+   struct arv *dir;
+} *Arv;
+
+Arv arv(Arv e, Item x, Arv d) {
+   Arv n = malloc(sizeof(struct arv));
+   n->esq  = e;
+   n->item = x;
+   n->dir  = d;
+   return n;
+}
+
+void exibe(Arv A,int n) {
+   if( A==NULL ) return;
+   exibe(A->dir,n+1);
+   printf("%*s%d\n",3*n,"",A->item);
+   exibe(A->esq,n+1);
+}
+
+
+void ins(Item x, Arv *A) {
+     if( *A == NULL ) *A = arv(NULL,x,NULL);
+     else if( x <= (*A)->item ) ins(x,&(*A)->esq);
+     else ins(x,&(*A)->dir);
+  }
+  
+
+Item minimo(Arv *A) {
+     if( *A == NULL ) abort();
+     if( (*A)->esq == NULL ) {
+        return (*A)->item;
+     }
+     return minimo(&(*A)->esq);
+  }
+
+int main(void) {
+   int v[11] = {71,43,64,92,80,27,58,35,16,100,133};
+   Arv A = NULL;
+   for(int i=0; i<11; i++) ins(v[i],&A);
+   puts("Inicial");
+   exibe(A,0);
+   printf ("o minimo eh: %d\n",minimo(&A));
+   return 0;
+}
+
+*/
+
+DEFINIÇÃO DE ARVORE É QUE CADA ELEMENTO SÓ PODE TER UM PONTEIRO APONTANDO PRA ELE
+entao 
+    o
+   / \
+  o   o
+   \ /
+    o 
+   n eh uma arvore por causa do ultimo elemento
+
+PRE ORDEM RAIZ, ESQUERDA E DIREITA 
+EM ORDEM ESQUERDA, RAIZ E DIREITA
+POS ORDEM ESQUERDA DIREITA E RAIZ 
+
+
+a pergunta (A->esq == A->dir) equivale a perguntar se aquilo é uma folha pois so serao iguais quando for nulo dos dois lados
+
+SE FOR VAZIA
+SE SO TIVER O PRIMEIRO ITEM 
+regra pro proximo
+se for pra retornar arvore ou criar no, retorna arv(xrecursaoesquerda,rrrrrrr,xrecursaodireita)  
+senao, pode retornar operacao booleana 
+ou retornar uma soma 
+
+
+
